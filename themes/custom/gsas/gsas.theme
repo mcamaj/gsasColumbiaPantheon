@@ -1,0 +1,170 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Columbia GSAS theme.
+ */
+
+use Drupal\Core\Url;
+use Drupal\Component\Utility\Unicode;
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function gsas_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $content_type = $node->bundle();
+    $suggestions[] = 'page__' . $content_type;
+  }
+}
+
+/**
+ * Implements of template_preprocess_paragraph__inside_gsas_item().
+ */
+function gsas_preprocess_paragraph__inside_gsas_item(&$variables) {
+  $variables['featured'] = $variables['paragraph']->get('field_featured')->value;
+}
+
+/**
+ * Implements of template_preprocess_field__HOOK().
+ */
+function gsas_preprocess_field__field_featured_text(&$variables) {
+  $element = $variables['element'];
+  if (($element['#entity_type'] === 'node') && (in_array($element['#bundle'], ['events']))) {
+    $value = strip_tags($variables['items'][0]['content']['#text']);
+    $variables['items'][0]['content']['#text'] = Unicode::truncate(
+      $value,
+      150,
+      TRUE,
+      TRUE
+    );
+  }
+}
+
+/**
+ * Helper function for field items sorting.
+ *
+ * @param array $a
+ *   Left array item.
+ * @param array $b
+ *   Right array item.
+ *
+ * @return int
+ *   Compare result.
+ */
+function _gsas_field_sor_callback($a, $b) {
+  return $a['content']['#title'] < $b['content']['#title'] ? -1 : 1;
+}
+
+/**
+ * Implements of template_preprocess_field__HOOK().
+ */
+function gsas_preprocess_field__field_additional_categories(&$variables) {
+  uasort($variables['items'], '_gsas_field_sor_callback');
+}
+
+/**
+ * Implements of template_preprocess_field__field_faces_facets().
+ */
+function gsas_preprocess_field__field_faces_facets(&$variables) {
+  foreach ($variables['items'] as &$item) {
+    $title = $item['content']['#paragraph']->get('field_title')->getValue();
+    $subject_name = $item['content']['#paragraph']->get('field_subject_name')->getValue();
+    $subject_title = $item['content']['#paragraph']->get('field_subject_title')->getValue();
+    $quote = $item['content']['#paragraph']->get('field_is_quote')->getValue();
+    $link = $item['content']['#paragraph']->get('field_link')->getValue();
+    $url = Url::fromUri($link[0]['uri'])->getInternalPath();
+
+    $item['title'] = $title[0]['value'];
+    $item['subject_name'] = $subject_name[0]['value'];
+    $item['subject_title'] = $subject_title[0]['value'];
+    $item['quote'] = $quote[0]['value'];
+    $item['url'] = $url;
+  }
+}
+
+/**
+ * Implements of template_preprocess_field__field_featured_story().
+ */
+function gsas_preprocess_field__field_featured_story(&$variables) {
+  _gsas_add_align_class($variables, 'field_featured_story_align');
+}
+
+/**
+ * Helper function that apply left/right class to the featured story field.
+ *
+ * @param array $variables
+ *   Field variables.
+ */
+function _gsas_add_align_class(&$variables, $field_name) {
+
+  $element = $variables['element'];
+  // Add left or right class to the featured story field wrapper.
+  if (
+    ($element['#entity_type'] === 'node')
+    && (in_array($element['#bundle'], ['features_page', 'resource_page']))
+  ) {
+
+    $node = $variables['element']['#object'];
+    if ($node->hasField($field_name)) {
+      $align = $node->get($field_name)->getValue();
+      if (!empty($align)) {
+        if ($align[0]['value']) {
+          $class = 'left';
+        }
+        else {
+          $class = 'right';
+        }
+      }
+      else {
+        $class = 'right';
+      }
+      $variables['attributes']['class'][] = $class;
+    }
+  }
+}
+
+/**
+ * Implements of template_preprocess_field__field_toolkit_tabs().
+ */
+function gsas_preprocess_field__field_toolkit_tabs(&$variables) {
+  foreach ($variables['items'] as &$item) {
+    if (array_key_exists('#paragraph', $item['content'])) {
+      $tabName = $item['content']['#paragraph']->get('field_title')->getValue();
+      $item['name'] = $tabName[0]['value'];
+
+      // Hyphen-separated name for tab data attribute.
+      $item['name_id'] = preg_replace("/[^\w]+/", "-", strtolower($tabName[0]['value']));
+
+    }
+  }
+}
+
+/**
+ * Implements of template_preprocess_node__teaser().
+ */
+function gsas_preprocess_node__teaser(&$variables) {
+  $variables['category'] = $variables['node']->type->entity->label();
+}
+
+/**
+ * Implements of template_preprocess_views_exposed_form().
+ */
+function gsas_preprocess_views_exposed_form(&$variables, $hook) {
+  // Only alter the required form based on id.
+  if ($variables['form']['#id'] == 'views-exposed-form-search-results') {
+    // Change the text on the submit button.
+    $variables['form']['type']['#options']['All'] = 'All';
+    $variables['form']['actions']['submit']['#value'] = t('Go');
+  }
+}
+
+/**
+ * Implements of template_preprocess_views_exposed_form().
+ */
+function gsas_preprocess_form(&$variables) {
+  if ($variables['attributes']['id'] == 'views-exposed-form-search-results') {
+    $variables['header_text'] = "Search Results";
+  }
+}

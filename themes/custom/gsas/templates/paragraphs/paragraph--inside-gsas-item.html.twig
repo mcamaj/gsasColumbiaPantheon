@@ -1,0 +1,9 @@
+{%
+set classes = [
+'item',
+featured ? 'featured',
+]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ content }}
+</div>

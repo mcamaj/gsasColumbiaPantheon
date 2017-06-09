@@ -1,0 +1,105 @@
+<?php
+
+/**
+ * @file
+ * Twitter utilities.
+ */
+
+require_once __DIR__ . '/vendor/j7mbo/twitter-api-php/TwitterAPIExchange.php';
+
+/**
+ * Imlpements hook_theme().
+ */
+function gsas_twitter_theme() {
+  $module_path = drupal_get_path('module', 'gsas_twitter');
+
+  return array(
+    'gsas_twitter' => array(
+      'variables' => array(
+        'tweets' => NULL,
+        'handle' => NULL,
+      ),
+      'template' => 'gsas-twitter',
+      'path' => $module_path . '/templates',
+    ),
+  );
+}
+
+/**
+ * Helper function to get tweets.
+ */
+function _gsas_twitter_get_tweets($settings, $handle, $count = 1, $exclude_replies = 'true', $include_rts = 'false') {
+  $tweets = array();
+
+  $tweet_buffer = ($exclude_replies == 'true' || $include_rts == 'false') ? 5 : 0;
+
+  $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+  $getfield = '?screen_name=' . $handle . '&count=' . ($count + $tweet_buffer) . '&exclude_replies=' . $exclude_replies . '&include_rts=' . $include_rts;
+  $requestMethod = 'GET';
+
+  $twitter = new TwitterAPIExchange($settings);
+
+  $response = $twitter->setGetfield($getfield)
+    ->buildOauth($url, $requestMethod)
+    ->performRequest();
+
+  if (!empty($response)) {
+    $raw_tweets = json_decode($response);
+
+    $tweet_count = 0;
+
+    foreach ($raw_tweets as $raw_tweet) {
+      if (!empty($raw_tweet->text)) {
+        $tweets[] = array(
+          'text' => $raw_tweet->text,
+          'created_at' => strtotime($raw_tweet->created_at),
+        );
+
+        $tweet_count++;
+      }
+
+      if ($tweet_count >= $count) {
+        break;
+      }
+    }
+  }
+
+  return $tweets;
+}
+
+/**
+ * Helper function to highlight terms.
+ */
+function _gsas_twitter_highlight_terms($text) {
+  $text_highlighted = NULL;
+
+  if (!empty($text)) {
+    $words = explode(' ', $text);
+
+    foreach ($words as $index => $word) {
+      if (in_array(substr($word, 0, 1), array('@', '#'))) {
+        $words[$index] = '<span class="highlighted">' . $word . '</span>';
+      }
+      elseif (strpos($word, 'http') !== FALSE) {
+        $parsed = parse_url($word);
+
+        $scheme = $parsed['scheme'];
+
+        if (!empty($scheme)) {
+          $scheme_long = $scheme . '://';
+
+          if (strpos($word, $scheme_long) !== -1) {
+            $no_scheme = substr($word, strlen($scheme_long));
+
+            $words[$index] = '<a href="' . $word . '">' . $no_scheme . '</a>';
+          }
+        }
+      }
+    }
+
+    $text_highlighted = implode(' ', $words);
+  }
+
+  return $text_highlighted;
+
+}

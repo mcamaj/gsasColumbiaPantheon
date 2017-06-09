@@ -1,0 +1,126 @@
+body.page-node-type-blog-landing {
+
+  .node.node--view-mode-full {
+    @include layout;
+    @include clearfix;
+    @include max-width-container;
+
+    @include media($bp960){
+      @include padding(null 30px null);
+    }
+
+    @include media($bp1280){
+      @include padding(null 0 null);
+    }
+
+    .section-title {
+      @include clearfix;
+      @include padding(25px 0);
+
+      @include media($bp580) {
+        @include padding(45px 0 25px);
+      }
+
+      @include media($bp768) {
+        @include padding(45px 0 40px);
+      }
+
+      @include media($bp960) {
+        @include padding(50px 0 25px);
+      }
+
+      @include media($bp1280) {
+        @include padding(50px 0 30px);
+      }
+
+      h1.page-title {
+        font-size: rem(40);
+        line-height: 1;
+        @include margin(0 0 10px);
+        padding-right: 50px;
+        font-family: $fontSansSerifMd;
+
+        @include media($bp580) {
+          font-size: rem(55);
+        }
+
+        @include media($bp768) {
+          float: left;
+          width: 48%;
+        }
+
+        @include media($bp1280) {
+          font-size: rem(70);
+          width: 26%;
+        }
+      }
+
+      .field--name-field-blurb {
+        font-family: $fontSansSerifLt;
+        @include rem(font-size, 16px);
+        letter-spacing: -0.2px;
+        line-height: 1.5;
+
+        @include media($bp580) {
+          @include rem(font-size, 20px);
+        }
+
+        @include media($bp768) {
+          float: right;
+          width: 50%;
+          @include padding(26px 0 0);
+          text-align: right;
+          line-height: 1.3;
+        }
+
+        @include media($bp1280) {
+          @include rem(font-size, 24px);
+          @include padding(36px 0 0);
+        }
+      }
+    }
+  }
+}
+
+.field--name-field-featured-posts {
+  position: relative;
+  @include clearfix;
+
+  &:before {
+    display: block;
+    border-right: 1px solid $color-gainsboro;
+    height: 100%;
+    width: 1px;
+    position: absolute;
+    top: 0;
+
+    @include media($bp768) {
+      content: "";
+      left: 66.6%;
+    }
+  }
+
+  > .field__item {
+
+    @include media($bp768) {
+      float: right;
+      width: 33.3%;
+      clear: right;
+      @include padding(0 0 0 25px);
+    }
+
+    @include media($bp1280) {
+      @include padding(0 0 0 40px);
+    }
+
+    &:first-child {
+
+      @include media($bp768) {
+        float: left;
+        width: 66.6%;
+        clear: none;
+        padding-left: 0;
+      }
+    }
+  }
+}

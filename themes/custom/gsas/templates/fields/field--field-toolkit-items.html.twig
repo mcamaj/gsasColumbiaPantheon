@@ -1,0 +1,10 @@
+<div class="toolkit-items">
+  {% for item in items %}
+    {{ loop.index % 2 == 1 ? '<div class="row">' }}
+      <div class="item">
+        {{ item.content }}
+      </div>
+    {{ loop.index % 2 == 0 ? '</div>' }}
+    {{ loop.last and loop.index % 2 == 1 ? '</div>' }}
+  {% endfor %}
+</div>

@@ -1,0 +1,54 @@
+.gsas-blocks-academic-calendar {
+  background-color: $color-cello;
+  color: $color-white;
+
+  .academic-calender-inner {
+    @extend .gsas-blocks-upcoming-events;
+
+    @include media($bp960) {
+      padding: 80px 30px 80px !important;
+    }
+
+    @include media($bp1280) {
+      padding: 80px 0 !important;
+    }
+
+    h2 {
+
+      &:after {
+        background-color: $color-white!important;
+      }
+    }
+
+    .events-header {
+
+      .all-link {
+
+        a {
+          color: $color-white !important;
+
+          &:after {
+            background: url('../../images/icon-white-solid-circle-arrow.svg') 0 0 no-repeat!important;
+          }
+        }
+      }
+    }
+
+    .item {
+
+      @include media($bp960) {
+        border-right: 1px solid rgba($color-black, 0.08%)!important;
+      }
+
+      > a {
+        color: $color-white!important;
+      }
+
+      &:last-child {
+        @include media($bp960) {
+          border-right: none!important;
+        }
+      }
+    }
+  }
+}

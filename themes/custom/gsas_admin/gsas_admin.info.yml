@@ -1,0 +1,9 @@
+name: GSAS Admin
+type: theme
+base theme: seven
+description: 'The default administration theme for Drupal 8 was designed with clean lines, simple blocks, and sans-serif font to emphasize the tools and tasks at hand.'
+alt text: 'Default administration theme for Drupal 8 with simple blocks and clean lines.'
+#version: VERSION
+core: 8.x
+libraries:
+ - gsas_admin/base

@@ -1,0 +1,6 @@
+type: module
+name: gsas_search
+description: 'GSAS Search'
+package: gsas
+
+core: '8.x'

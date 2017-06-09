@@ -1,0 +1,154 @@
+@mixin line-height($fontsize, $leading) {
+  line-height: ceil(($leading / $fontsize) * 10000) / 10000;
+}
+
+@mixin large-text() {
+  font-size: rem(20);
+  @include line-height(20, 32);
+
+  @include media($bp580) {
+    font-size: rem(24);
+    @include line-height(24, 36);
+  }
+}
+
+@mixin small-text() {
+  font-size: rem(14);
+  @include line-height(14, 22);
+  letter-spacing: rem(0.1);
+
+  @include media($bp580) {
+    font-size: rem(16);
+    @include line-height(15, 24);
+    letter-spacing: rem(-0.1);
+  }
+
+  @include media($bp1280) {
+    @include line-height(16, 28);
+  }
+}
+
+body {
+  font-family: $fontSerif;
+  color: $color-black;
+  font-size: rem(14);
+  @include line-height(14, 24);
+
+  @include media($bp580) {
+    font-size: rem(16);
+    @include line-height(16, 30);
+  }
+
+  @include media($bp960) {
+    font-size: rem(18);
+    @include line-height(18, 34);
+  }
+}
+
+a {
+  color: $color-cardinal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $fontSansSerif;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+
+    .no-touchevents &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+h1 {
+  font-size: rem(28);
+  @include line-height(28, 32);
+  font-weight: normal;
+
+  @include media($bp580) {
+    font-size: rem(40);
+    @include line-height(40, 44);
+  }
+
+  @include media($bp1280) {
+    font-size: rem(50);
+    @include line-height(50, 54);
+  }
+}
+
+h2 {
+  font-size: rem(22);
+  @include line-height(22, 26);
+  @include margin(0 0 20px);
+  font-weight: normal;
+
+  @include media($bp580) {
+    font-size: rem(26);
+    @include line-height(26, 32);
+    @include margin(0 0 28px);
+  }
+
+  @include media($bp1280) {
+    font-size: rem(30);
+    @include line-height(30, 34);
+  }
+}
+
+h3 {
+  font-size: rem(18);
+  @include line-height(18, 20);
+  @include margin(0 0 20px);
+  font-weight: normal;
+
+  @include media($bp580) {
+    font-size: rem(22);
+    @include line-height(22, 24);
+  }
+
+  @include media($bp1280) {
+    font-size: rem(26);
+    @include line-height(26, 30);
+  }
+}
+
+h4 {
+  font-size: rem(14);
+  @include line-height(14, 18);
+  @include margin(0 0 20px);
+  font-weight: normal;
+
+  @include media($bp580) {
+    font-size: rem(16);
+    @include line-height(16, 20);
+  }
+
+  @include media($bp1280) {
+    font-size: rem(18);
+    @include line-height(18, 22);
+  }
+}
+
+p {
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .large-text &,
+  &.large {
+    @include large-text;
+  }
+
+  .small-text &,
+  &.small {
+    @include small-text;
+  }
+}

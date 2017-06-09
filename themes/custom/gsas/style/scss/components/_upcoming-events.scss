@@ -1,0 +1,286 @@
+// Covers upcoming events block on homepage / features page / events detail
+.gsas-blocks-upcoming-events {
+  @include layout;
+  @include clearfix;
+  position: relative;
+  font-family: $fontSansSerif;
+  @include padding(50px null 35px);
+
+  @include media($bp580) {
+    padding: 60px 5% 45px;
+  }
+
+  @include media($bp768) {
+    @include padding(60px 30px);
+  }
+
+  @include media($bp960) {
+    @include padding(80px 30px 30px);
+  }
+
+  @include media($bp1280) {
+    @include padding(100px 0 50px);
+  }
+
+  .events-header {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    margin-bottom: rem(16);
+
+    @include media($bp580) {
+      margin-bottom: 30px;
+    }
+
+    @include media($bp960) {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      flex: 0.45;
+      font-size: rem(30);
+      font-family: $fontSansSerifMd;
+      font-weight: normal;
+      line-height: 1.1;
+      position: relative;
+      @include padding(20px 10px null null);
+      margin-bottom: rem(8);
+      letter-spacing: rem(-0.6);
+
+      @include media($bp580) {
+        @include padding(24px null null null);
+        font-size: rem(40);
+        flex: 1;
+      }
+
+      @include media($bp960) {
+        display: block;
+        font-size: rem(48);
+        margin-bottom: rem(26);
+      }
+
+      @include media($bp1280) {
+        font-size: rem(55);
+      }
+
+      &:after {
+        content: '';
+        width: 50px;
+        height: 2px;
+        background: $color-black;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        @include media($bp960) {
+          left: calc(50% - 25px);
+        }
+      }
+    }
+
+    .all-link {
+      position: absolute;
+      font-size: rem(11);
+      font-family: $fontSansSerifBld;
+      right: 0;
+      @include centerer(false, true);
+      top: 43%;
+
+      @include media($bp580) {
+        font-size: rem(12);
+        padding-top: 30px;
+        top: 50%;
+      }
+
+      @include media($bp960) {
+        padding-top: 5px;
+      }
+
+      @include media($bp1280) {
+        padding-top: 7px;
+      }
+
+      a {
+        @include arrow-right;
+        color: $color-cardinal;
+        letter-spacing: 0.75px;
+        overflow: hidden;
+
+        @include media($bp960) {
+          width: 100%;
+          overflow: visible;
+        }
+      }
+    }
+  }
+
+  .events-container {
+
+    @include media($bp960) {
+      display: flex;
+    }
+
+    @include media($bp1280) {
+      padding: 0 30px;
+    }
+
+    @include media($bp1280) {
+      padding: 0;
+    }
+  }
+
+  .item {
+    @include clearfix;
+    @include padding(18px null);
+    clear: both;
+    border-bottom: 1px solid rgba($color-black, 0.08%);
+
+    @include media($bp960) {
+      flex: 1 1 percentage(1/3);
+      padding: 0 25px;
+      clear: none;
+      border-bottom: none;
+      border-right: 1px solid rgba($color-black, 0.08%);
+    }
+
+    @include media($bp1280) {
+      padding: 0 45px 0 55px;
+    }
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      border-bottom: 0;
+
+      @include media($bp960) {
+        border-right: none;
+      }
+    }
+
+    > a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      color: $color-black;
+
+      &:hover {
+
+        h3 {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .field--name-field-event-start-date {
+      @include span-columns(10);
+
+      @include media($bp580) {
+        @include span-columns(9)
+      }
+
+      @include media($bp960) {
+        @include remove-layout;
+        margin-bottom: 14px;
+      }
+
+      .month {
+        display: none;
+
+        @include media($bp580) {
+          display: block;
+        }
+        span {
+          display: none;
+
+          @include media($bp580) {
+            display: block;
+          }
+        }
+
+        &:after {
+          content: attr(data-month-abbr);
+          display: block;
+          @include media($bp580) {
+            display: none;
+          }
+        }
+      }
+
+      .month-short {
+        display: block;
+        font-size: rem(16);
+
+        @include media($bp580) {
+          display: none;
+        }
+      }
+
+      .day {
+        font-size: rem(40);
+        line-height: 1;
+        font-family: $fontSansSerifMd;
+
+        @include media($bp580) {
+          font-size: rem(48);
+        }
+
+        @include media($bp960) {
+          font-size: rem(50)
+        }
+
+        @include media($bp1280) {
+          font-size: rem(60);
+        }
+
+      }
+    }
+
+    .event-info {
+      @include span-columns(26);
+
+      @include media($bp580) {
+        @include span-columns(27);
+        margin-top: 8px;
+      }
+
+      @include media($bp960) {
+        @include remove-layout;
+      }
+
+      h3 {
+        font-size: rem(18);
+        line-height: 1.2;
+        font-family: $fontSansSerifMd;
+        font-weight: normal;
+        margin-bottom: 12px;
+        margin-top: 5px;
+
+        @include media($bp580) {
+          font-size: rem(20);
+          margin-bottom: 20px;
+        }
+
+        @include media($bp960) {
+          font-size: rem(24);
+          margin-bottom: 25px;
+        }
+      }
+
+      .field--name-field-teaspoon {
+        font-size: rem(14);
+        @include line-height(14, 20);
+        font-family: $fontSerif;
+        margin-bottom: 0;
+        letter-spacing: rem(-0.1);
+
+        @include media($bp580) {
+          font-size: rem(16);
+          @include line-height(16, 22);
+        }
+      }
+    }
+  }
+}

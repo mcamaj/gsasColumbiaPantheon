@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Gsas core updates.
+ */
+
+use Drupal\node\Entity\Node;
+
+/**
+ * Exclude 404 page from the search index.
+ *
+ * Anatoliy Poliakov <anatoliy.polyakov@digitalpulp.com>.
+ */
+function gsas_core_update_8001() {
+
+  $node = Node::load(1281);
+  $node->set('field_exclude_from_search', 1);
+  $node->save();
+
+}

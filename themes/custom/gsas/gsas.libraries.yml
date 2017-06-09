@@ -1,0 +1,56 @@
+styles:
+  css:
+    theme:
+      style/css/styles.css: {}
+      style/css/print.css: { media: print }
+
+formstone:
+  js:
+    bower_components/formstone/dist/js/core.js: {}
+  dependencies:
+    - core/jquery
+
+modernizr:
+  js:
+    js/modernizr.min.js: { preprocess: 0, weight: -21 }
+  dependencies:
+    - core/jquery
+
+mediaquery:
+  js:
+    bower_components/formstone/dist/js/mediaquery.js: {}
+  dependencies:
+    - gsas/formstone
+
+equalize:
+  js:
+    bower_components/formstone/dist/js/equalize.js: {}
+  dependencies:
+    - gsas/formstone
+
+dropdown:
+  css:
+    theme:
+      bower_components/formstone/dist/css/dropdown.css: {}
+  js:
+    bower_components/formstone/dist/js/dropdown.js: {}
+  dependencies:
+    - gsas/formstone
+
+swiper:
+  css:
+    theme:
+      bower_components/Swiper/dist/css/swiper.min.css: {}
+  js:
+    bower_components/Swiper/dist/js/swiper.jquery.min.js: {}
+  dependencies:
+    - core/jquery
+
+scripts:
+  js:
+    js/dist/scripts.min.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupal
+      - core/jquery.once
+      - core/underscore

@@ -1,0 +1,7 @@
+type: module
+name: GSAS Blocks
+description: 'GSAS blocks module.'
+package: gsas
+core: '8.x'
+dependencies:
+ - gsas_menu

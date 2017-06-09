@@ -1,0 +1,306 @@
+#block-sectionheaderblock {
+  @include max-width-container;
+  position: relative;
+  @include padding(0 15px);
+
+  @include media($bp580) {
+    @include padding(0 30px);
+  }
+
+  @include media($bp960) {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+
+  .section-title {
+    @include padding(25px 0);
+
+    @include media($bp580) {
+      @include padding(45px 0 15px);
+    }
+
+    @include media($bp960) {
+      @include max-width-container;
+      @include padding(50px 30px 25px);
+    }
+
+    @include media($bp1280) {
+      @include padding(50px 0 25px);
+    }
+
+    .node {
+      @include clearfix;
+    }
+
+    h2 {
+      font-size: rem(40);
+      font-family: $fontSansSerifMd;
+      font-weight: normal;
+      line-height: 1;
+      letter-spacing: rem(-0.9);
+      @include margin(0 0 10px);
+      width: 50%;
+
+      @include media($bp768) {
+        font-size: rem(54);
+        padding-right: 22%;
+        float: left;
+      }
+
+      @include media($bp1280) {
+        font-size: rem(70);
+        letter-spacing: rem(-2);
+        padding-right: 20%;
+      }
+    }
+
+    .node__content {
+      @include media($bp768) {
+        width: 50%;
+        float: right;
+        padding-left: 50px;
+      }
+
+      @include media($bp960) {
+        padding-left: 0;
+      }
+    }
+
+    .field--name-field-blurb {
+      font-family: $fontSansSerifLt;
+      @include rem(font-size, 16px);
+      letter-spacing: rem(-0.15);
+      line-height: 1.5;
+
+      @include media($bp580) {
+        @include rem(font-size, 20px);
+        padding: 5px 0;
+        line-height: 1.4;
+        margin-bottom: 7px;
+      }
+
+      @include media($bp768) {
+        text-align: right;
+        padding: 24px 0;
+      }
+
+      @include media($bp960) {
+        text-align: right;
+        padding: 34px 0;
+      }
+
+      @include media($bp1280) {
+        @include rem(font-size, 24px);
+      }
+    }
+  }
+
+  .section-tabs {
+    position: relative;
+    font-family: $fontSansSerif;
+    font-size: rem(14);
+    z-index: 4;
+    margin-bottom: rem(20);
+
+    @include media($bp580) {
+      margin-bottom: rem(30);
+    }
+
+    @include media($bp768) {
+      width: 50%;
+    }
+
+    @include media($bp960) {
+      position: static;
+      width: 100%;
+      margin-bottom: 0;
+      background-color: $color-cello;
+
+      ul.menu {
+        @include max-width-container;
+        @include padding(0 30px);
+
+        li a {
+          color: $color-white;
+          &:hover {
+            color: $color-white;
+          }
+        }
+      }
+    }
+
+    @include media($bp1280) {
+      font-size: rem(16);
+
+      ul.menu {
+        padding: 0;
+      }
+    }
+
+    ul {
+      @include clearfix;
+
+      @include media($bp960) {
+        position: static;
+      }
+
+      @include media($bp1280) {
+        @include max-width-container;
+      }
+
+      li {
+        float: left;
+        @include margin(0 20px 0 0);
+
+        @include media($bp1024) {
+          @include margin(0 30px 0 0);
+        }
+
+        a {
+          text-decoration: none;
+          display: inline-block;
+          color: $color-black;
+          height: 40px;
+          line-height: 40px;
+          font-family: $fontSansSerifMd;
+
+          @include media($bp580) {
+            font-size: rem(16);
+            height: 50px;
+            line-height: 50px;
+          }
+
+          @include media($bp960) {
+            height: 75px;
+            line-height: 75px;
+          }
+
+          &:hover {
+            cursor: pointer;
+            color: $color-cardinal;
+          }
+        }
+
+        &.menu-item--active-trail {
+          a {
+            border-bottom: 4px solid $color-cardinal;
+          }
+        }
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+
+    .select-sub-menu-trigger {
+      @include media($bp960) {
+        display: none;
+      }
+
+      label {
+        display: block;
+        padding: 0 20px;
+        height: 40px;
+        line-height: 40px;
+        font-size: rem(14);
+        letter-spacing: rem(-0.4);
+        background-color: $color-white-smoke;
+        position: relative;
+        font-family: $fontSansSerifMd;
+
+        @include media($bp580) {
+          font-size: rem(16);
+          height: 50px;
+          line-height: 50px;
+        }
+
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 14px;
+          height: 8px;
+          background: url('../../images/icon-caret-down-black.svg') center center/contain;
+          right: 20px;
+          top: 50%;
+          transition: all 0.3s ease-in-out;
+          @include transform(translateY(-50%));
+        }
+      }
+
+      &.is-open {
+        label {
+          &:after {
+            background: url('../../images/icon-caret-up-black.svg') center center/contain;
+          }
+        }
+      }
+    }
+
+    ul {
+      @include no-bullet;
+      position: absolute;
+      width: 100%;
+      top: 40px;
+      left: 0;
+      display: none;
+
+      @include media($bp580) {
+        top: 50px;
+      }
+
+      @include media($bp960) {
+        position: static;
+      }
+
+      @include media($bp1280) {
+        position: static;
+        @include max-width-container;
+      }
+
+      .sub-nav-is-open & {
+        display: block;
+        padding: 0;
+        background-color: $color-white-smoke;
+      }
+
+      @include media($bp960) {
+        position: relative;
+        width: auto;
+        left: auto;
+        top: auto;
+        display: block;
+      }
+
+      li {
+        display: block;
+        float: none;
+
+        .sub-nav-is-open & {
+          padding: 0;
+          margin: 0;
+        }
+
+        @include media($bp960) {
+          float: left;
+        }
+
+        a {
+          .sub-nav-is-open & {
+            padding: 0 20px;
+            display: block;
+            width: 100%;
+
+            &.is-active {
+              border: none;
+              background-color: $color-cardinal;
+              color: $color-white;
+            }
+          }
+        }
+      }
+    }
+  }
+}

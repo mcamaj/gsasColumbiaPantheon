@@ -1,0 +1,47 @@
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+
+  <div{{ content_attributes.addClass('node__content') }}>
+
+    {{ content.field_image }}
+    {{ content.field_teaser_image }}
+
+    <div class="featured-story-outer">
+
+      <div class="featured-story-inner">
+
+        <div class="featured-story-content">
+
+          <div class="inner">
+
+            {{ content.field_category }}
+
+            <h2{{ title_attributes }}>
+              <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            </h2>
+
+            {{ content.field_featured_text }}
+            {{ content.field_event_description }}
+
+          </div>
+
+          {{ drupal_field('field_more_link', 'node', NULL) }}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</article>

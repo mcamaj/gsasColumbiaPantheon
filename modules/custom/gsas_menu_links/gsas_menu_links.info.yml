@@ -1,0 +1,6 @@
+type: module
+name: gsas_menu_links
+description: 'GSAS menu links custom code.'
+package: gsas
+
+core: '8.x'

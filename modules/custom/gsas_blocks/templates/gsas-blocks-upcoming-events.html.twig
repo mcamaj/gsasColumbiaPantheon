@@ -1,0 +1,15 @@
+<div class="gsas-blocks-{{ class_name }}">
+  <div class="academic-calender-inner">
+    <div class="events-header">
+      <h2>{{ title }}</h2>
+      <div class="all-link">{{ all_link }}</div>
+    </div>
+    <div class="events-container">
+      {% for item in items %}
+      <div class="item">
+        {{ item }}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

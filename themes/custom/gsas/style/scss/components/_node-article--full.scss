@@ -1,0 +1,276 @@
+body.page-node-type-article {
+
+  .node.node--view-mode-full {
+    @include media($bp960){
+      @include layout;
+    }
+
+    .node-content {
+      @include layout;
+      @include clearfix;
+      @include padding(35px 16px 20px);
+
+      @include media($bp580){
+        @include padding(45px 30px null);
+      }
+
+      @include media($bp960){
+        @include padding(60px 30px 30px);
+      }
+
+      @include media($bp1280){
+        @include padding(70px 0 40px);
+        max-width: 880px;
+      }
+    }
+
+    h1.page-title {
+      @include margin(0 0 16px);
+      letter-spacing: rem(-0.2);
+
+      @include media($bp580){
+        @include margin(0 0 24px);
+        letter-spacing: rem(-0.4);
+      }
+    }
+
+    .article-byline {
+      font-family: $fontSansSerif;
+      font-size: rem(14);
+      @include margin(0 0 25px);
+
+      @include media($bp960){
+        @include margin(0 0 15px);
+      }
+
+      strong {
+        font-weight: normal;
+      }
+
+      .article-date,
+      .field--name-field-author {
+        display: inline-block;
+        @include margin(0 10px 0 0);
+      }
+    }
+
+    .paragraph--type--body-text {
+      @include media($bp960-1280) {
+        padding: 0 15%;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: $fontSansSerifMd;
+      }
+    }
+
+    .group-image-container {
+      position: relative;
+      @include margin(0 -16px 25px);
+
+      @include media($bp580){
+        @include margin(0 -30px 25px);
+      }
+
+      @include media($bp960){
+        @include margin(0 0 30px);
+      }
+
+      @include media($bp1280){
+        @include margin(0 0 40px);
+      }
+
+      .field--name-field-image {
+        img {
+          max-width: 100%;
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+      }
+
+      .field--name-field-image-caption {
+        font-family: $fontSansSerif;
+        font-size: rem(12);
+        line-height: 1.1;
+        font-weight: 300;
+        color: $color-empress;
+        @include padding(15px 15px 20px);
+
+        @include media($bp580){
+          font-size: rem(13);
+          @include padding(15px 30px 20px);
+        }
+
+        @include media($bp960){
+          @include padding(15px 0 25px);
+        }
+
+        @include media($bp1280){
+          @include padding(15px 0 0);
+        }
+      }
+
+      .sharethis-wrapper {
+        margin-top: 35px;
+
+        @include media($bp1280){
+          margin-left: -190px;
+          position: absolute;
+          top: 0;
+          margin-top: 0;
+        }
+      }
+    }
+
+    .field--name-field-youtube-embed {
+      position: relative;
+      @include margin(0 -16px 27px);
+
+      @include media($bp580){
+        @include margin(0 -30px 40px);
+      }
+
+      @include media($bp960){
+        @include margin(0 0 50px);
+      }
+
+      iframe {
+        max-width: 100%;
+        @include rem(height, 210px);
+
+        @include media($bp580){
+          @include rem(height, 325px);
+        }
+
+        @include media($bp768){
+          @include rem(height, 432px);
+        }
+
+        @include media($bp960){
+          @include rem(height, 506px);
+        }
+      }
+    }
+
+    .field--name-field-summary {
+      font-size: rem(18);
+      @include line-height(18, 30);
+      @include margin(0 0 30px);
+
+      @include media($bp580){
+        font-size: rem(20);
+        @include line-height(20, 32);
+        @include margin(0 0 40px);
+      }
+
+      @include media($bp960){
+        font-size: rem(24);
+        @include line-height(24, 36);
+        @include margin(0 0 50px);
+      }
+    }
+
+    .field--name-field-body {
+
+      .embedded-entity {
+        @include clearfix;
+
+        &.align-left {
+          float: none;
+
+          img {
+            float: left;
+            margin: 0;
+          }
+        }
+
+        &.align-right {
+          float: none;
+
+          img {
+            float: right;
+            margin: 0;
+          }
+        }
+      }
+
+      img {
+        @include media($bp580) {
+          width: auto;
+          max-width: 60%;
+          margin: auto;
+        }
+
+        &.align-left {
+          float: left;
+        }
+
+        &.align-right {
+          float: right;
+        }
+      }
+
+      .full-width {
+        margin-bottom: 30px;
+        p {
+          img {
+            max-width: 100%;
+          }
+        }
+
+        img {
+          max-width: 100% !important;
+        }
+      }
+    }
+
+    .field--name-field-dropdown-items {
+      @include media($bp960-1280) {
+        padding: 0 15%;
+      }
+      .field__item {
+        margin-bottom: rem(20);
+
+        .field--name-field-title {
+          position: relative;
+          color: $color-cardinal;
+          font-family: $fontSansSerifMd;
+          font-size: rem(18);
+          padding-left: rem(40);
+          cursor: pointer;
+
+          &:before {
+            position: absolute;
+            top: 3px;
+            left: 0;
+            content: '';
+            display: block;
+            background-image: url('../../images/icon-plus-red.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 24px;
+            width: 24px;
+
+            @include media($bp580){
+              top: 5px;
+            }
+          }
+
+          &.is-open {
+            &:before {
+              background-image: url('../../images/icon-minus-red.svg');
+            }
+          }
+        }
+
+        .field--name-field-body {
+          color: $color-black;
+          padding-left: rem(40);
+          display: none;
+        }
+      }
+    }
+  }
+}

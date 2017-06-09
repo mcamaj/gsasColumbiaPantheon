@@ -1,0 +1,238 @@
+/* Print Styles */
+@page {
+    size:A4 landscape;
+  }
+
+body {
+  margin: 0.5cm;
+  font-family: sans-serif;
+  font-size: 12pt;
+  line-height: 1.3;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  letter-spacing: 0 !important;
+}
+
+h1 {
+  font-size: 24pt;
+}
+
+h2 {
+  font-size: 20pt;
+}
+
+h3 {
+  font-size: 18pt;
+}
+
+h4 {
+  font-size: 16pt;
+}
+
+h5 {
+  font-size: 14pt;
+}
+
+
+body.page-node-type-article,
+body.page-node-type-blog {
+
+  .menu,
+  #block-audiences,
+  #block-sectionheaderblock .section-tabs,
+  .social-links,
+  .wrapper-prev-next-links,
+  .article-byline,
+  .sharethis-wrapper {
+    display: none !important;
+  }
+
+  .group-image-container {
+    margin: 0 0 25px !important;
+    img {
+      max-width: 75% !important;
+    }
+  }
+
+  .node-content {
+    padding-top: 0 !important;
+
+    .field--name-field-category {
+      padding-top: 10px;
+    }
+  }
+
+  a {
+    word-wrap: break-word;
+    &:after {
+      content: '';
+    }
+  }
+
+  .ftr-global {
+    padding: 0;
+    > div {
+      padding: 0 15px;
+    }
+  }
+
+  #block-footer1,
+  #block-footertext {
+    margin-bottom: 0;
+  }
+
+  #block-gsas-branding {
+    left: 35px;
+  }
+
+  .field--name-field-related-content {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  .paragraph--type--related-content {
+    padding: 0;
+  }
+
+  .node.node--view-mode-full h1.page-title {
+    margin: 15px 0 30px;
+  }
+
+  .paragraph--type--body-text {
+    margin-bottom: 10px;
+
+    table {
+      margin-bottom: 0;
+
+      tbody tr td {
+        padding: 25px 15px 0;
+
+        &:last-child {
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+// T2
+.page-node-type-features-page {
+  .menu,
+  #block-audiences,
+  #block-sectionheaderblock .section-tabs {
+    display: none;
+  }
+
+  a {
+    word-wrap: break-word;
+    &:after {
+      content: '';
+    }
+  }
+
+  #block-gsas-branding {
+    left: 20px;
+  }
+
+  #block-sectionheaderblock {
+    padding: 0;
+  }
+
+  .node--view-mode-featured-hero {
+    img {
+      max-width: 75% !important;
+    }
+  }
+
+  .featured-story-outer {
+    .featured-story-content {
+      margin: 0;
+
+      .inner {
+        padding: 20px 0;
+      }
+
+      .field--name-field-more-link {
+        display: none;
+      }
+    }
+  }
+
+  .additional-content-container {
+    padding-top: 0;
+
+    .additional-content-header {
+      padding: 0 0 20px;
+    }
+
+    .cta {
+      display: none;
+    }
+
+    .items-container {
+      padding: 0;
+      .item {
+        padding: 0;
+        margin-bottom: 40px;
+        img {
+          max-width: 75% !important;
+        }
+      }
+    }
+  }
+
+  .field--name-field-stats-block {
+    padding: 20px 0 !important;
+
+    .field-see-more {
+      display: none;
+    }
+
+    .field--name-field-stats > .field__item {
+      text-align: left !important;
+      float: none !important;
+      width: 100% !important;
+    }
+  }
+
+  .field--name-field-wide-cta {
+    .field--name-field-cta-image {
+      img {
+        max-width: 75% !important;
+      }
+    }
+    .overlay {
+      display: none;
+    }
+
+    .inner {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      padding: 20px 0;
+
+      .text .field--name-field-title {
+        margin-top: 15px;
+      }
+    }
+
+    .cta {
+      display: none;
+    }
+  }
+
+  .ftr-global {
+    padding: 0;
+    > div {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  #block-footer1,
+  #block-footertext {
+    margin-bottom: 0;
+  }
+}

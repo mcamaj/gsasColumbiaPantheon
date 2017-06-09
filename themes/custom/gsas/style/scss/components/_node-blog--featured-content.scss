@@ -1,0 +1,173 @@
+// Node Blog: View mode: Featured Content // Used on Blog Landing CT
+.node--type-blog.node--view-mode-featured-content {
+  @include clearfix;
+  @include padding(0 0 20px);
+  @include margin(0 0 20px);
+  border-bottom: 1px solid $color-gainsboro;
+
+  @include media($bp768) {
+    @include padding(0 0 40px);
+  }
+
+  .fields-category {
+    font-family: $fontSansSerifMd;
+    font-size: rem(13);
+    @include line-height(13, 15);
+    color: $color-cello;
+    @include margin(0 0 20px);
+  }
+
+  .field--name-field-teaser-image {
+    float: right;
+    width: 32.4%;
+    @include margin(0 0 5px 10px);
+
+    @include media($bp768) {
+      float: none;
+      width: 53%;
+      @include margin(0 0 20px);
+    }
+  }
+
+  h2.node-title {
+    font-size: rem(18);
+    @include line-height(18, 22);
+    font-family: $fontSansSerifMd;
+    @include margin(0 0 20px);
+
+    @include media($bp768) {
+      font-size: rem(20);
+      @include line-height(20, 24);
+    }
+
+    @include media($bp1280) {
+      font-size: rem(24);
+      @include line-height(24, 28);
+    }
+  }
+
+  .field--name-field-featured-text {
+    font-size: rem(14);
+    @include line-height(14, 22);
+
+    @include media($bp768) {
+      font-size: rem(16);
+      @include line-height(16, 22);
+    }
+
+    @include media($bp768) {
+      @include line-height(16, 24);
+    }
+  }
+
+  .read-more {
+    @extend .cta;
+    display: none;
+  }
+
+
+  // When the node is the first one.
+  .field--name-field-featured-posts > .field__item:first-child & {
+    @include padding(0 0 40px);
+
+    @include media($bp768) {
+      border-bottom: 0;
+    }
+
+    .node-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .fields-category {
+      order: 2;
+      font-size: rem(16);
+      @include line-height(16, 18);
+      @include margin(0 0 10px);
+
+      @include media($bp768) {
+        font-size: rem(18);
+        @include line-height(18, 20);
+        @include margin(0 0 15px);
+      }
+
+      @include media($bp1280) {
+        font-size: rem(20);
+        @include line-height(20, 20);
+      }
+    }
+
+    .field--name-field-teaser-image {
+      order: 1;
+      @include margin(0 -6% 27px);
+      float: none;
+      width: inherit;
+
+      // IE10+ Fix
+      @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        height: 1%;
+      }
+
+      @include media($bp580) {
+        @include margin(0 -30px 30px);
+      }
+
+      @include media($bp768) {
+        @include margin(0 0 30px);
+      }
+
+      @include media($bp1280) {
+        @include margin(0 0 40px);
+      }
+    }
+
+    h2.node-title {
+      order: 3;
+      font-size: rem(22);
+      @include line-height(22, 26);
+
+      @include media($bp768) {
+        font-size: rem(32);
+        @include line-height(32, 36);
+        @include margin(0 0 30px);
+        @include rem(padding-right, 40px);
+      }
+
+      @include media($bp1280) {
+        font-size: rem(40);
+        @include line-height(40, 44);
+        @include rem(padding-right, 70px);
+      }
+    }
+
+    .field--name-field-featured-text {
+      order: 5;
+      @include margin(0 0 20px);
+
+      @include media($bp768) {
+        font-size: rem(16);
+        @include line-height(16, 28);
+        @include margin(0 0 30px);
+        @include rem(padding-right, 40px);
+      }
+
+      @include media($bp768) {
+        @include margin(0 0 40px);
+        @include rem(padding-right, 70px);
+      }
+    }
+
+    .read-more {
+      order: 6;
+      display: inline-block;
+      width: 192px;
+    }
+  }
+
+
+  // When the node is the last one.
+  .field--name-field-featured-posts > .field__item:last-child & {
+    margin: 0 0 32px;
+    border: 0;
+  }
+}

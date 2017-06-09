@@ -1,0 +1,20 @@
+gsas.mobile:
+  label: mobile
+  mediaQuery: '(min-width: 0px) and (max-width: 579px)'
+  weight: 0
+gsas.tablet:
+  label: tablet
+  mediaQuery: 'all and (min-width: 580px) and (max-width: 767px)'
+  weight: 1
+gsas.narrow:
+  label: narrow
+  mediaQuery: 'all and (min-width: 768px) and (max-width: 959px)'
+  weight: 2
+gsas.desktop:
+  label: desktop
+  mediaQuery: 'all and (min-width: 960px) and (max-width: 1279px)'
+  weight: 3
+gsas.wide:
+  label: wide
+  mediaQuery: 'all and (min-width: 1280px)'
+  weight: 4

@@ -1,0 +1,21 @@
+<?php
+/**
+ * @file
+ * Main file for menu links module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_menu_link_content_presave().
+ */
+function gsas_menu_links_menu_link_content_presave(EntityInterface $entity) {
+  $menu_name = $entity->getMenuName();
+
+  switch ($menu_name) {
+    case 'main':
+      $entity->expanded = 1;
+
+      break;
+  }
+}

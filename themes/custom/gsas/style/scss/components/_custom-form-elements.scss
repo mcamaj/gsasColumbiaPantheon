@@ -1,0 +1,152 @@
+.path-user,
+.path-user-login,
+.path-search {
+
+  .layout-content {
+    @include media($bp960) {
+      @include max-width-container;
+    }
+
+    .user-form,
+    .user-pass,
+    .user-login-form {
+      @include max-width-container;
+      padding: 40px 5%;
+
+      @include media($bp580) {
+        padding: 40px 30px;
+      }
+
+      @include media($bp960) {
+        padding: 40px 69px;
+      }
+
+      summary {
+        color: $color-night-rider;
+        padding: 0 0 20px 0;
+        fill: $color-night-rider;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      input[type="email"],
+      .form-search {
+        border: none;
+        background-color: $color-light-gray;
+        padding: 10px 8px;
+        color: $color-black;
+        width: 100%;
+        box-sizing: border-box;
+
+        @include media($bp960) {
+          width: auto;
+          padding: 20px 10px;
+        }
+      }
+
+      label[for="edit-keys"] {
+        display: block;
+        @include rem(margin, 0 0 15px);
+      }
+
+      input[type="submit"] {
+        background: $color-allports;
+        padding: 15px;
+        color: $color-white;
+        border: none;
+        margin: 20px 0;
+
+        &:hover {
+          background: $color-cello;
+        }
+      }
+
+      label {
+        margin-right: 20px;
+        text-transform: uppercase;
+        color: $color-night-rider;
+        font-weight: bold;
+      }
+
+      .description,
+      p {
+        color: $color-night-rider;
+        margin: 10px 0 0 0;
+        @include rem(font-size, 14px);
+      }
+
+      .form-item {
+        margin: 0 0 30px 0;
+      }
+
+      #edit-timezone {
+        .form-item-timezone {
+          ul {
+            padding: 0;
+
+            li {
+              @include no-bullet;
+
+              input[type="radio"] {
+                margin: 0 20px 0 0;
+              }
+
+              label {
+                text-transform: none;
+                @include rem(font-size, 14px);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// For right after you log in
+.user-logged-in.path-user {
+
+  article {
+    @include padding(40px 0);
+  }
+}
+
+
+#block-gsas-local-tasks {
+  background-color: $color-cello;
+  font-family: $fontSansSerif;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    @include layout;
+
+    @include media($bp960) {
+      @include max-width-container;
+      padding: 0 30px;
+    }
+
+    li {
+      display: inline-block;
+      margin-right: 0.3em; /* LTR */
+    }
+
+    a {
+      display: block;
+      padding: 0.5em 1em;
+      text-decoration: none;
+      color: $color-white;
+
+      &:hover {
+        color: $color-night-rider;
+        color: $color-white;
+      }
+
+      &.is-active {
+        background-color: $color-light-gray;
+        color: $color-allports;
+      }
+    }
+  }
+}

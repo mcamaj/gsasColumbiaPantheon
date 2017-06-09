@@ -1,0 +1,89 @@
+ul.social-links {
+  @include no-bullet;
+  display: block;
+
+  li {
+    display: inline-block;
+    margin-right: 35px;
+    vertical-align: middle;
+  }
+
+  a {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    @include hide-text;
+    @include size(32px);
+    line-height: 1;
+    color: inherit;
+    background-size: cover;
+
+    .no-touchevents & {
+      transition: color 0.2s;
+
+      &:hover {
+        color: $color-cardinal;
+      }
+    }
+
+    &.facebook {
+      background-image: url('../../images/icon-facebook-black.svg');
+      @include rem(width, 13px);
+      @include rem(height, 28px);
+
+      @include media($bp960) {
+        @include rem(width, 15px);
+        @include rem(height, 32px);
+      }
+
+      &:hover {
+        background-image: url('../../images/icon-facebook-red.svg');
+      }
+    }
+
+    &.twitter {
+      background-image: url('../../images/icon-twitter-black.svg');
+      @include rem(width, 28px);
+      @include rem(height, 23px);
+
+      @include media($bp960) {
+        @include rem(width, 32px);
+        @include rem(height, 26px);
+      }
+
+      &:hover {
+        background-image: url('../../images/icon-twitter-red.svg');
+      }
+    }
+
+    &.linkedin {
+      background-image: url('../../images/icon-linkedin-black.svg');
+      @include rem(width, 24px);
+      @include rem(height, 24px);
+
+      @include media($bp960) {
+        @include rem(width, 28px);
+        @include rem(height, 28px);
+      }
+
+      &:hover {
+        background-image: url('../../images/icon-linkedin-red.svg');
+      }
+    }
+
+    &.instagram {
+      background-image: url('../../images/icon-instagram-black.svg');
+      @include rem(width, 28px);
+      @include rem(height, 28px);
+
+      @include media($bp960) {
+        @include rem(width, 32px);
+        @include rem(height, 32px);
+      }
+
+      &:hover {
+        background-image: url('../../images/icon-instagram-red.svg');
+      }
+    }
+  }
+}

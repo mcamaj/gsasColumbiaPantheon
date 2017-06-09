@@ -1,0 +1,5 @@
+@import 'neat-helpers';
+
+$grid-columns: 36 !global;
+$column: modular-scale(3, 1em, $perfect-fourth);
+$gutter: modular-scale(1, 1em, $perfect-fourth);

@@ -1,0 +1,218 @@
+body.page-node-type-events {
+
+  .node--type-events.node--view-mode-full {
+
+    > .node-content {
+      position: relative;
+
+      @include media($bp768){
+        @include layout;
+        @include clearfix;
+        @include max-width-container;
+      }
+    }
+  }
+
+  .group-main {
+    @include padding(40px 5%);
+
+    @include media($bp580){
+      @include padding(40px 30px);
+    }
+
+    @include media($bp768){
+      float: left;
+      width: 63%;
+    }
+
+    @include media($bp768-960) {
+      @include padding(40px 30px 40px 0);
+    }
+
+    @include media($bp1280){
+      @include padding(55px 30px 55px 0);
+    }
+
+    .field-main-date {
+      font-family: $fontSansSerifMd;
+      color: $color-cello;
+      font-size: rem(18);
+      line-height: rem(22);
+      margin-bottom: rem(15);
+
+      @include media($bp768){
+        font-size: rem(24);
+        line-height: rem(28);
+        margin-bottom: rem(20);
+      }
+
+      @include media($bp1280){
+        font-size: rem(30);
+        margin-bottom: rem(25);
+      }
+    }
+
+    h1.page-title {
+      font-size: rem(28);
+      line-height: 1.2;
+      margin-bottom: rem(30);
+      font-family: $fontSansSerifMd;
+
+      @include media($bp768){
+        font-size: rem(40);
+        margin-bottom: rem(40);
+      }
+
+      @include media($bp1280){
+        font-size: rem(50);
+        margin-bottom: rem(50);
+      }
+    }
+
+    .field--name-field-event-description,
+    .field--name-field-featured-text {
+      @include media($bp1280){
+        padding-right: 30px;
+      }
+    }
+
+    .field--name-field-image {
+      @include margin( 0 -16px 27px);
+
+      @include media($bp580){
+        @include margin( 0 -30px null);
+      }
+
+      @include media($bp768){
+        @include margin( 0 0 40px);
+      }
+
+      @include media($bp1280){
+        @include margin( 0 0 55px);
+      }
+    }
+  }
+
+  .group-sidebar {
+    position: relative;
+    padding: 40px 5%;
+    color: $color-white;
+    font-family: $fontSansSerifLt;
+    font-size: rem(14);
+    line-height: rem(22);
+    z-index: 1;
+
+    @include media($bp580){
+      @include padding(40px 30px);
+    }
+
+    @include media($bp768){
+      @include padding(90px 30px);
+      position: static;
+      float: right;
+      width: 33%;
+    }
+
+    @include media($bp1280){
+      @include padding(115px 40px);
+      font-size: rem(16);
+      line-height: rem(28);
+    }
+
+    &:before {
+      content: "";
+      display: block;
+      background-color: $color-cello;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+
+      @include media($bp768){
+        width: 33%;
+      }
+    }
+
+    a {
+      color: $color-white;
+      text-decoration: none;
+    }
+
+    .field__label,
+    .field-label {
+      font-family: $fontSansSerifBld;
+      display: block;
+      margin-bottom: rem(4);
+    }
+
+    > .field {
+      margin-bottom: rem(25);
+
+      @include media($bp1280){
+        margin-bottom: rem(30);
+      }
+    }
+
+    .field-date-time {
+
+      .field--name-field-event-start-time,
+      .field--name-field-event-end-time {
+        display: inline-block;
+      }
+
+      .field--name-field-event-end-time {
+
+        &:before {
+          content: "- "
+        }
+      }
+    }
+
+    .field-location {
+      .field-location-pin {
+        display: inline-block;
+        background: url('../../images/icon-pin-white.svg') 0 0 no-repeat;
+        width: 11px;
+        height: 15px;
+        text-indent: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .field-label {
+        display: inline-block;
+        margin-right: 6px;
+      }
+    }
+
+    .field-website-url {
+      font-family: $fontSansSerifMd;
+      margin-bottom: rem(35);
+
+      a {
+        display: inline-block;
+
+        &:after {
+          content: '';
+          display: inline-block;
+          background: url('../../images/icon-link-out-white.svg') 0 0 no-repeat;
+          width: 15px;
+          height: 15px;
+          margin-left: rem(10);
+        }
+      }
+    }
+
+    .field-rsvp {
+      @extend .cta;
+      display: block;
+    }
+
+    .sharethis-wrapper {
+      margin-bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,122 @@
+.wide-cta {
+  position: relative;
+  background: black;
+  min-height: 320px;
+
+  @include media($bp768) {
+    min-height: 400px;
+  }
+
+  .background-image {
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: $color-cello;
+      opacity: .8;
+    }
+  }
+
+  .inner {
+    @include max-width-container;
+    position: absolute;
+    @include clearfix;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+    color: $color-white;
+    z-index: 10;
+    padding: 0 5%;
+    width: 100%;
+
+    @include media($bp580) {
+      padding: 0 30px;
+    }
+
+    @include media($bp1280) {
+      padding: 0;
+    }
+
+    .text {
+      margin-bottom: 35px;
+
+      @include media($bp960) {
+        width: 60%;
+        float: left;
+      }
+
+      .field--name-field-section {
+        font-family: $fontSansSerifLt;
+        font-size: rem(20);
+        letter-spacing: rem(0.5);
+
+        @include media($bp580) {
+          font-size: rem(21);
+          letter-spacing: rem(1);
+          line-height: 1.5;
+        }
+
+        @include media($bp960) {
+          margin-bottom: 12px;
+        }
+      }
+
+      .field--name-field-title {
+        font-family: $fontSansSerifMd;
+        font-size: rem(30);
+        line-height: 1.1;
+        margin-bottom: 15px;
+
+        @include media($bp580) {
+          font-size: rem(40);
+          margin-bottom: 25px;
+        }
+
+        @include media($bp960) {
+          font-size: rem(52);
+          padding-right: 5%;
+          margin-bottom: 35px;
+        }
+      }
+
+      .field--name-field-description {
+        padding-right: 10px;
+        font-size: rem(14);
+        line-height: 1.45;
+
+        @include media($bp580) {
+          font-size: rem(15);
+          letter-spacing: rem(0.3);
+          padding-right: 0;
+          line-height: 1.7;
+        }
+
+        @include media($bp960) {
+          padding-right: 10%;
+        }
+      }
+    }
+
+    .link {
+      @include media($bp960) {
+        width: 50%;
+        float: right;
+
+        .cta {
+          position: absolute;
+          top: 50%;
+          right: 30px;
+          @include transform(translateY(-50%));
+        }
+      }
+
+      @include media($bp1280) {
+        .cta {
+          right: 0;
+        }
+      }
+    }
+  }
+}

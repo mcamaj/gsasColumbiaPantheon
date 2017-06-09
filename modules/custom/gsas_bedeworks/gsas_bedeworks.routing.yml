@@ -1,0 +1,14 @@
+gsas_bedeworks.sync_form:
+  path: '/admin/config/bedeworks_start'
+  defaults:
+    _form: '\Drupal\gsas_bedeworks\Form\BedeworksSyncForm'
+    _title: 'Bedeworks sync start'
+  requirements:
+    _permission: 'administer site configuration'
+gsas_bedeworks.settings_form:
+  path: '/admin/config/services/gsas_bedeworks'
+  defaults:
+    _form: 'Drupal\gsas_bedeworks\Form\GSASBedeworksConfig'
+    _title: 'Events sync settings'
+  requirements:
+    _permission: 'administer site configuration'

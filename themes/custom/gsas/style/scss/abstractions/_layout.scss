@@ -1,0 +1,62 @@
+@mixin max-width-container {
+  max-width: 1280px;
+
+  @include media($bp1280) {
+    width: 97%;
+    @include margin(null auto);
+  }
+}
+
+@mixin max-width-container-wide {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+@mixin layout {
+  @include outer-container(1280px);
+  padding: 0 5%;
+
+  @include media($bp580) {
+    padding: 0 30px;
+  }
+
+  @include media($bp960) {
+    padding: 0;
+  }
+}
+
+@mixin layout-960 {
+  @include media($bp960) {
+    @include outer-container(1280px);
+    width: percentage(1140/1280);
+    min-width: 900px;
+  }
+}
+
+@mixin layout-1280 {
+  @include media($bp1280) {
+    @include outer-container(1280px);
+    width: percentage(1140/1280);
+  }
+}
+
+@mixin remove-layout {
+  width: auto;
+  min-width: 0;
+  max-width: none;
+}
+
+@mixin small-layout-padding {
+  padding-right: 16px;
+  padding-left: 16px;
+
+  @include media($bp580) {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  @include media($bp960) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}

@@ -1,0 +1,200 @@
+body.page-node-type-features-page {
+
+  #block-gsas-page-title {
+    display: none;
+  }
+
+  // See more stories under Featured Story
+  .field--name-field-more-link {
+    display: none;
+  }
+
+  .stats-outer {
+    background: $color-cardinal url('../../images/bg-stats.jpg') no-repeat;
+    background-size: cover;
+    background-position: top center;
+  }
+
+  .field--name-field-stats-block {
+    position: relative;
+    @include clearfix;
+    padding: 60px 5%;
+    color: $color-white;
+    font-family: $fontSansSerif;
+    font-size: rem(14);
+    line-height: 1.3;
+
+    @include media($bp580) {
+      @include padding(60px 30px);
+      font-size: rem(16);
+    }
+
+    @include media($bp1280){
+      @include padding(80px null 50px);
+      font-size: rem(20);
+      max-width: 1280px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .field--name-field-title {
+      position: relative;
+      @include padding(20px null null);
+      font-size: rem(28);
+      letter-spacing: rem(1.1);
+      line-height: 1.15;
+      width: 50%;
+      @include margin(0 0 40px);
+      font-family: $fontSansSerifMd;
+
+      @include media($bp580) {
+        @include padding(30px null null);
+        font-size: rem(42);
+        width: 70%;
+        @include margin(0 0 50px);
+      }
+
+      @include media($bp960) {
+        text-align: center;
+        width: auto;
+        @include margin(0 0 60px);
+      }
+
+      @include media($bp1280){
+        font-size: rem(52);
+        @include margin(0 0 70px);
+      }
+
+      &:before {
+        content: '';
+        width: 50px;
+        height: 2px;
+        background: $color-white;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        @include media($bp960){
+          left: 50%;
+          margin-left: -25px;
+        }
+      }
+    }
+
+    .field-see-more {
+      position: absolute;
+      top: 86px;
+      right: 5%;
+      text-transform: uppercase;
+      font-size: rem(11);
+      font-family: $fontSansSerifBld;
+      letter-spacing: 0.75px;
+
+
+      @include media($bp580) {
+        top: 106px;
+        font-size: rem(12);
+        right: 30px;
+      }
+
+      @include media($bp1280) {
+        top: 132px;
+        right: 0;
+      }
+
+      a {
+        color: $color-white;
+        display: inline-block;
+        @include padding(0 35px 0 0);
+        line-height: 24px;
+        text-decoration: none;
+
+        &.mobile {
+
+          @include media($bp960) {
+            display: none;
+          }
+        }
+
+        &.desk {
+          display: none;
+
+          @include media($bp960) {
+            display: inline-block;
+          }
+        }
+
+        &:after {
+          content: '';
+          background: url('../../images/icon-white-solid-circle-arrow.svg') 0 0 no-repeat;
+          width: 24px;
+          height: 24px;
+          display: block;
+          position: absolute;
+          right: 0;
+          top: 0;
+          transition: right $transition-speed $transition-timing;
+        }
+      }
+    }
+
+    .field--name-field-stats {
+
+      > .field__item {
+        text-align: center;
+        @include margin(0 0 25px);
+        float: left;
+        width: 50%;
+        @include padding(0 10px);
+        font-family: $fontSansSerifMd;
+
+
+        @include media($bp580) {
+          width: 33.33%;
+          @include margin(0 0 54px);
+        }
+
+        @include media($bp960) {
+          @include margin(0 0 72px);
+        }
+
+        // For 375
+        &:nth-of-type(2n+1) {
+          clear: left;
+
+          @include media($bp580) {
+            clear: none;
+          }
+        }
+
+        // For 580
+        &:nth-of-type(3n+1) {
+
+          @include media($bp580) {
+            clear: left;
+          }
+        }
+
+        .field--name-field-stat-value {
+          font-size: rem(32);
+          line-height: .9;
+          @include margin(0 0 10px);
+          padding: 0;
+
+          @include media($bp580) {
+            font-size: rem(40);
+          }
+
+          @include media($bp960) {
+            font-size: rem(60);
+          }
+
+          @include media($bp1280) {
+            font-size: rem(80);
+            @include margin(0 0 20px);
+          }
+        }
+      }
+    }
+  }
+}

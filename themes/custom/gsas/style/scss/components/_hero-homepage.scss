@@ -1,0 +1,28 @@
+.group-hero {
+  position: relative;
+  overflow: hidden;
+  background-position: center center;
+  background-size: cover;
+  height: 430px;
+  width: 100%;
+
+  @include media($bp960) {
+    height: 540px;
+  }
+
+  @include media($bp1280) {
+    height: 720px;
+  }
+
+  .theatre-mode {
+    display: none;
+
+    @include media($bp960) {
+      display: block;
+    }
+
+    video {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * GSAS bedeworks integration module.
+ */
+
+use Drupal\gsas_bedeworks\BedeworksBatch;
+
+/**
+ * Implementation of the cronjob for the events syncing from the Bedeworks.
+ */
+function gsas_bedeworks_cron() {
+  // Get the last time we processed data.
+  $state = \Drupal::state();
+  $last = $state->get('gsas_bedeworks.cron_last', 0);
+
+  // Each 15 minutes run sync process.
+  if ((REQUEST_TIME - $last) >= 60 * 15) {
+    $sync = new BedeworksBatch();
+    $events = $sync->getFeedEvents();
+
+    foreach ($events as $event) {
+      $sync->processEventItem($event);
+    }
+
+    \Drupal::logger('gsas_bedeworks')->info('Events sync process finished');
+    $state->set('gsas_bedeworks.cron_last', REQUEST_TIME);
+  }
+
+}

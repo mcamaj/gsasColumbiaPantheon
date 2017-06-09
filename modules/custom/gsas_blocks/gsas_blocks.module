@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * GSAS blocks module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function gsas_blocks_theme() {
+  $module_path = drupal_get_path('module', 'gsas_blocks');
+
+  return array(
+    'gsas_blocks_upcoming_events' => array(
+      'variables' => array(
+        'items' => NULL,
+        'all_link' => NULL,
+        'title' => NULL,
+        'class_name' => NULL,
+      ),
+      'template' => 'gsas-blocks-upcoming-events',
+      'path' => $module_path . '/templates',
+    ),
+    'gsas_blocks_accessibility_message' => array(
+      'template' => 'gsas-blocks-accessibility-message',
+      'path' => $module_path . '/templates',
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function gsas_blocks_preprocess_node(&$variables) {
+  /* @var \Drupal\node\Entity\Node $node */
+  $node = $variables['node'];
+  $view_mode = $variables['view_mode'];
+
+  if ($view_mode === 'full') {
+    if (
+      ($node->getType() == 'home_page')
+      || ($node->getType() == 'features_page')
+      || ($node->getType() == 'events')
+    ) {
+      $upcoming_events = \Drupal::service('plugin.manager.block')
+        ->createInstance('gsas_blocks_upcoming_events', [])
+        ->build();
+      $variables['content']['upcoming_events'] = $upcoming_events;
+    }
+
+    if (
+      ($node->getType() == 'events')
+      || ($node->getType() == 'events_landing')
+    ) {
+      $accesibility_message = \Drupal::service('plugin.manager.block')
+        ->createInstance('gsas_blocks_accessibility_message', [])
+        ->build();
+      $variables['content']['accessibility_message'] = $accesibility_message;
+    }
+  }
+  elseif ($view_mode === 'featured_hero') {
+    $renderer = \Drupal::service('renderer');
+
+    $renderer->addCacheableDependency($variables, \Drupal::routeMatch()->getParameter('node'));
+  }
+}

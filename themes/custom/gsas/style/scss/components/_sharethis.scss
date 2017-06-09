@@ -1,0 +1,114 @@
+.sharethis-wrapper {
+  @include rem(margin-bottom, 30px);
+  text-align: center;
+
+  @include media($bp960) {
+    text-align: left;
+  }
+
+  @include media($bp1280) {
+    text-align: center;
+  }
+
+  .page-node-type-blog &,
+  .page-node-type-article & {
+
+    @include media($bp960) {
+      @include rem(width, 32px);
+      float: left;
+      margin-left: 0;
+    }
+
+    @include media($bp1280) {
+      @include rem(margin-left, -155px);
+    }
+  }
+
+  body.page-node-type-events .group-sidebar & {
+
+    @include media($bp768) {
+      text-align: left;
+      padding-left: rem(8);
+    }
+
+      @include media($bp960) {
+        padding-left: rem(10);
+      }
+
+    span {
+      @include rem(margin, 0 40px 0 0);
+
+      &.st_facebook_custom {
+        background: url('../../images/icon-facebook-white.svg') no-repeat center/100%;
+      }
+
+      &.st_twitter_custom {
+        background: url('../../images/icon-twitter-white.svg') no-repeat center/100%;
+      }
+
+      &.st_email_custom {
+        background: url('../../images/icon-mail-white.svg') no-repeat center/100%;
+        margin-right: 0;
+      }
+    }
+  }
+
+  span {
+    display: inline-block;
+    @include rem(margin, 0 40px 0 0);
+    cursor: pointer;
+
+    @include media($bp960) {
+      @include rem(margin, 0 0 40px);
+    }
+
+    &:last-child {
+      @include rem(margin, 0);
+    }
+
+    &.st_facebook_custom {
+      background: url('../../images/icon-facebook-red.svg') no-repeat center/100%;
+      @include rem(width, 13px);
+      @include rem(height, 28px);
+
+      @include media($bp960) {
+        @include rem(width, 15px);
+        @include rem(height, 32px);
+      }
+
+      &:hover {
+        background: url('../../images/icon-facebook-black.svg') no-repeat center/100%;
+      }
+    }
+
+    &.st_twitter_custom {
+      background: url('../../images/icon-twitter-red.svg') no-repeat center/100%;
+      @include rem(width, 28px);
+      @include rem(height, 23px);
+
+      @include media($bp960) {
+        @include rem(width, 32px);
+        @include rem(height, 26px);
+      }
+
+      &:hover {
+        background: url('../../images/icon-twitter-black.svg') no-repeat center/100%;
+      }
+    }
+
+    &.st_email_custom {
+      background: url('../../images/icon-mail-red.svg') no-repeat center/100%;
+      @include rem(width, 28px);
+      @include rem(height, 19px);
+
+      @include media($bp960) {
+        @include rem(width, 32px);
+        @include rem(height, 22px);
+      }
+
+      &:hover {
+        background: url('../../images/icon-mail-black.svg') no-repeat center/100%;
+      }
+    }
+  }
+}

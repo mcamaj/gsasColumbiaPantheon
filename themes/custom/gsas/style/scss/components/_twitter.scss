@@ -1,0 +1,159 @@
+.group-twitter {
+  @include clearfix;
+  background-position: top center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 36% 0 0 0;
+  @include margin(null null 20px null);
+  position: relative;
+
+  @include media($bp580) {
+    background-size: cover;
+    height: 400px;
+    @include padding(340px null null null);
+    @include margin(null null 260px null);
+  }
+
+  @include media($bp768) {
+    height: 450px;
+    margin-bottom: 0;
+    padding: 30px;
+  }
+
+  @include media($bp960) {
+    width: 100%;
+  }
+
+  @include media($bp1280) {
+    height: 600px;
+    padding: 55px 0;
+  }
+
+  .field--name-field-twitter-account {
+    position: relative;
+    @include max-width-container;
+
+    @include media($bp768) {
+      width: 100%;
+      z-index: 1;
+      height: 100%;
+      top: 50%;
+      left: 50%;
+      @include centerer;
+    }
+
+    .gsas-twitter-block {
+      position: relative;
+      background-color: $color-white;
+      @include padding(25px 20px);
+      width: calc(100% - 30px);
+      margin: 0 auto;
+      text-align: center;
+
+      @include media($bp580) {
+        @include padding(25px);
+        width: calc(100% - 60px);
+      }
+
+      @include media($bp768) {
+        position: absolute;
+        @include transform(translateY(-50%));
+        width: 31%;
+        height: 85%;
+        top: 50%;
+        right: 30px;
+      }
+
+      @include media($bp960) {
+        @include padding(35px 25px);
+        width: calc(35% - 36px);
+        height: 80%;
+      }
+
+      @include media($bp1280) {
+        width: calc(36.3% - 36px);
+        @include padding(50px 30px);
+        right: 0;
+      }
+
+      ul {
+        @include no-bullet;
+      }
+    }
+  }
+
+  .twitter-icon {
+    display: inline-block;
+    background: url('../../images/icon-twitter-blue.svg') no-repeat center/100%;
+    @include rem(width, 36px);
+    @include rem(height, 40px);
+    text-decoration: none;
+    display: inline-block;
+
+    @include media($bp960) {
+      @include rem(width, 32px);
+      @include rem(height, 26px);
+    }
+
+    @include media($bp1280) {
+      @include margin(null null 17px);
+    }
+  }
+
+  .twitter-handle {
+    font-family: "helvetica";
+    display: block;
+    font-size: rem(20);
+    font-family: $fontSansSerifBld;
+    text-align: center;
+    @include margin(null null 11px null);
+
+    @include media($bp960) {
+      @include margin(null null 23px null);
+    }
+
+    @include media($bp1280) {
+      @include margin(null null 32px);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  .tweet {
+    font-family: $fontSansSerif;
+
+    .tweet-text {
+      text-align: left;
+      font-size: rem(16);
+      @include line-height(16, 26);
+      @include margin(null null 18px null);
+      padding-left: rem(3);
+
+      @include media($bp1280) {
+        font-size: rem(18);
+        @include line-height(18, 30);
+        @include margin(null null 27px null);
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        font-family: $fontSansSerifBld;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .tweet-time {
+      display: block;
+      color: $color-dim-gray;
+      font-size: rem(14);
+      text-align: center;
+    }
+  }
+}

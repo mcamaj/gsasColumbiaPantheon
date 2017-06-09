@@ -1,0 +1,143 @@
+$cwidth: 60px !default;
+$gutter: 20px !default;
+$cols: 12 !default;
+$dir: 'LTR' !default;
+
+@function gwidth($c:$cols) {
+  @return ($cwidth * $c) + ($gutter * $c);
+}
+
+$twidth: gwidth($cols) !default;
+
+@function calcwidth() {
+  @return $twidth / gwidth($cols);
+}
+
+$min-width: 480;
+$correction: 0.5 / $min-width * 100;
+
+@mixin clearfix() {
+  *zoom: 1;
+
+  &::before,
+  &::after {
+    content: '';
+    display: table;
+  }
+
+  &::after {
+    clear: both;
+  }
+}
+
+body {
+  @include clearfix();
+  min-width: $twidth;
+  width: 100%;
+}
+
+@mixin row($c:$cols) {
+  display: block;
+  margin: 0 auto;
+  $rwidth: gwidth($c) * calcwidth();
+  @if $twidth == 100% {
+    $rwidth: 100%;
+  }
+  width: $rwidth;
+  *width: $rwidth - $correction;
+  @include clearfix();
+}
+
+@mixin column($x, $realcols:$cols, $margin: 'normal') {
+  display: block;
+  position: relative;
+  clear: none;
+  $colwidth: (gwidth($x) - $gutter) * calcwidth();
+  $colmargin: ($gutter / 2) * calcwidth();
+  @if $twidth == 100% {
+    $colwidth: ((gwidth($x) - $gutter) * calcwidth()) * ($cols / $realcols);
+    $colmargin: (($gutter / 2) * calcwidth()) * ($cols / $realcols);
+  }
+
+  $rightmargin: $colmargin;
+  $leftmargin: $colmargin;
+
+  width: $colwidth;
+
+  margin-right: $rightmargin;
+  margin-left: $leftmargin;
+
+  *width: $colwidth - $correction;
+  *margin-right: $rightmargin - $correction;
+  *margin-left: $leftmargin - $correction;
+
+  @if $margin == 'alpha' {
+    @if $twidth == 100% {
+      $rightmargin: $rightmargin * 2;
+    }
+    margin-right: $rightmargin;
+  }
+  @if $margin == 'omega' {
+    @if $twidth == 100% {
+      $leftmargin: $leftmargin * 2;
+    }
+    margin-left: $leftmargin;
+  }
+
+  @if $dir == 'LTR' {
+    float: left;
+  }
+  @if $dir == 'RTL' {
+    float: right;
+  }
+}
+
+@mixin push($x:1) {
+  @if $dir == 'LTR' {
+    left: ($gutter + $cwidth) * calcwidth() * $x;
+    right: auto;
+  }
+  @if $dir == 'RTL' {
+    left: auto;
+    right: ($gutter + $cwidth) * calcwidth() * $x;
+  }
+}
+
+@mixin pull($x:1) {
+  @if $dir == 'LTR' {
+    left: auto;
+    right: ($gutter + $cwidth) * calcwidth() * $x;
+  }
+  @if $dir == 'RTL' {
+    left: ($gutter + $cwidth) * calcwidth() * $x;
+    right: auto;
+  }
+}
+
+@mixin prefix($x:1) {
+  @if $dir == 'LTR' {
+    margin-left: ((($gutter + $cwidth) * $x) + $gutter / 2) * calcwidth();
+  }
+  @if $dir == 'RTL' {
+    margin-right: ((($gutter + $cwidth) * $x) + $gutter / 2) * calcwidth();
+  }
+}
+
+@mixin suffix($x:1) {
+  @if $dir == 'LTR' {
+    margin-right: ((($gutter + $cwidth) * $x) + $gutter / 2) * calcwidth();
+  }
+  @if $dir == 'RTL' {
+    margin-left: ((($gutter + $cwidth) * $x) + $gutter / 2) * calcwidth();
+  }
+}
+
+@mixin column-reset() {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  left: auto;
+  right: auto;
+  float: none;
+  clear: both;
+}

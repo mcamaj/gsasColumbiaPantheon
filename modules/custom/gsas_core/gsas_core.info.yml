@@ -1,0 +1,8 @@
+type: module
+name: gsas_core
+description: 'GSAS core module.'
+package: gsas
+dependencies:
+  - image
+
+core: '8.x'

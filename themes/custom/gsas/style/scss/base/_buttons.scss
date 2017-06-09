@@ -1,0 +1,47 @@
+.cta {
+  display: inline-block;
+  background: $color-cardinal;
+  position: relative;
+  overflow: hidden;
+
+  .no-touchevents & {
+
+    &:before {
+      content: '';
+      background: $color-black;
+      width: 101%;
+      position: absolute;
+      height: 100%;
+      top: 0;
+      left: -101%;
+      transition: left 0.2s;
+    }
+
+    &:hover:before {
+      left: 0;
+    }
+  }
+
+  a {
+    @include vertical-align-flex;
+    color: $color-white;
+    font: rem(11) $fontSansSerifBld;
+    line-height: 1;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+    height: rem(44);
+    padding: 0 58px 0 20px;
+    position: relative;
+    text-decoration: none;
+    background: url('../../images/icon-white-circle-arrow.svg') calc(100% - 20px) center/24px 24px no-repeat;
+    cursor: pointer;
+
+    @include media($bp580) {
+      font-size: rem(12);
+      height: rem(50);
+      padding: 0 67px 0 30px;
+      background-position: calc(100% - 30px);
+      letter-spacing: 0.75px;
+    }
+  }
+}

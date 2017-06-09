@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ * GSAS Date Filter hooks.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_form_alter().
+ *
+ * {@inheritdoc}
+ */
+function gsas_date_filter_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Attach custom date filter to the Events landing page.
+  if ($form['#id'] == 'views-exposed-form-event-calendar-block-1') {
+
+    $view = $form_state->get('view');
+    if (!$view->hasUrl()) {
+      // If we are building an ajax form, don't set the action to the views
+      // ajax route.
+      $current = Url::fromRoute('<current>');
+      if (!$current->getRouteName() == 'views.ajax') {
+        $form_action = $current->toString();
+      }
+      else {
+        // Instead set the action to the page we were on.
+        $referer = \Drupal::request()->server->get('HTTP_REFERER');
+        $form_action = parse_url($referer, PHP_URL_PATH);
+      }
+    }
+    else {
+      $form_action = $view->getUrl()->toString();
+    }
+
+    $form['#action'] = $form_action;
+    $form['gsas_events_date_select'] = array(
+      '#type' => 'select',
+      '#title' => t('Date'),
+      '#options' => array(
+        'All' => t('- Any -'),
+        'Today' => t('Today'),
+        'This Week' => t('This Week'),
+        'Next Week' => t('Next Week'),
+        'This Month' => t('This Month'),
+        'Next Month' => t('Next Month'),
+      ),
+      '#default_value' => 'All',
+      '#attributes' => array(
+        'class' => array('date-select'),
+      ),
+      '#weight' => 1,
+      '#name' => 'gsas_events_date_select',
+    );
+
+    $form['#attached']['library'][] = 'gsas_date_filter/events_landing_filters';
+    $form['field_event_access_target_id']['#weight'] = 0;
+    $form['field_event_organizer_target_id']['#weight'] = 2;
+  }
+
+  // Add custom date filter for the BLog landing page.
+  if ($form['#id'] == 'views-exposed-form-blog-landing-list-block-1') {
+    $form['gsas_events_date_select'] = array(
+      '#type' => 'select',
+      '#title' => t('Date'),
+      '#options' => array(
+        'All' => t('- Any -'),
+        'Today' => t('Today'),
+        'This Week' => t('This Week'),
+        'Last Week' => t('Last Week'),
+        'Last Month' => t('Last Month'),
+        'This Year'  => t('This Year'),
+        'Last Year' => t('Last Year'),
+      ),
+      '#default_value' => 'All',
+      '#attributes' => array(
+        'class' => array('date-select'),
+      ),
+      '#weight' => 1,
+      '#name' => 'gsas_events_date_select',
+    );
+
+    $form['#attached']['library'][] = 'gsas_date_filter/blog_landing_filters';
+  }
+}

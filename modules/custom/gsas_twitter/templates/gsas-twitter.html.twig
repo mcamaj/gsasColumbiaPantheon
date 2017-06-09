@@ -1,0 +1,16 @@
+<div class="gsas-twitter-block">
+  <div class="twitter-icon"></div>
+  <span class="twitter-handle"><a href="https://twitter.com/{{ handle }}">@{{ handle }}</a></span>
+  <ul>
+  {% for tweet in tweets %}
+      <li class="tweet">
+          <div class="tweet-text">
+            {{ tweet.text | raw }}
+          </div>
+          <span class="tweet-time">
+            {{ tweet.created_at }}
+          </span>
+      </li>
+  {% endfor %}
+  </ul>
+</div>

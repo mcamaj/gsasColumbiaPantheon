@@ -1,0 +1,155 @@
+<?php
+
+/**
+ * @file
+ * GSAS Core module.
+ */
+
+use \Drupal\Core\Link;
+use \Drupal\node\Entity\Node;
+use \Drupal\Core\Form\FormStateInterface;
+use \Drupal\Core\Entity\EntityInterface;
+use \Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+
+/**
+ * Imlpements hook_theme().
+ */
+function gsas_core_theme() {
+  $module_path = drupal_get_path('module', 'gsas_core');
+
+  return array(
+    'gsas_core_blog_link' => array(
+      'variables' => array(
+        'link' => NULL,
+        'node_link' => NULL,
+        'type' => NULL,
+      ),
+      'template' => 'gsas-blog-link',
+      'path' => $module_path . '/templates',
+    ),
+  );
+}
+
+/**
+ * Implememts hook_form_search_block_form_alter().
+ */
+function gsas_core_form_search_block_form_alter(&$form, FormStateInterface $form_state) {
+  // Change form attributes according to mockup.
+  $form['actions']['submit']['#value'] = t('Go');
+  $form['keys']['#attributes']['placeholder'] = t('Search Columbia GSAS');
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function gsas_core_entity_extra_field_info() {
+
+  $extra['node']['blog']['display']['previous_link'] = array(
+    'label' => t('Previous post link'),
+    'description' => t('A link to the previous post'),
+    'weight' => 100,
+    'visible' => TRUE,
+  );
+
+  $extra['node']['blog']['display']['next_link'] = array(
+    'label' => t('Next post link'),
+    'description' => t('A link to the next post'),
+    'weight' => 100,
+    'visible' => TRUE,
+  );
+
+  return $extra;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function gsas_core_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+
+  $created = $entity->created->value;
+  if ($display->getComponent('previous_link')) {
+
+    $prev_node = \Drupal::entityQuery('node')
+      ->condition('created', $created, '<')
+      ->condition('type', 'blog')
+      ->sort('created', 'DESC')
+      ->execute();
+
+    if (!empty($prev_node)) {
+      $nid  = array_values($prev_node)[0];
+      $node = Node::load($nid);
+      $build['previous_link'] = [
+        '#theme' => 'gsas_core_blog_link',
+        '#type' => 'blog-previous-link',
+        '#link' => _gsas_core_make_node_link($nid, t('Prev')),
+        '#node_link' => _gsas_core_make_node_link($nid, $node->title->value),
+      ];
+    }
+  }
+
+  if ($display->getComponent('next_link')) {
+
+    $next_node = \Drupal::entityQuery('node')
+      ->condition('created', $created, '>')
+      ->condition('type', 'blog')
+      ->sort('created', 'ASC')
+      ->execute();
+
+    if (!empty($next_node)) {
+      $nid  = array_values($next_node)[0];
+      $node = Node::load($nid);
+      $build['next_link'] = [
+        '#theme' => 'gsas_core_blog_link',
+        '#type' => 'blog-next-link',
+        '#link' => _gsas_core_make_node_link($nid, t('Next')),
+        '#node_link' => _gsas_core_make_node_link($nid, $node->title->value),
+      ];
+    }
+  }
+
+}
+
+/**
+ * Custom function that renders node link.
+ *
+ * @param int $nid
+ *    Node id.
+ * @param string $title
+ *    Link title.
+ *
+ * @return string
+ *    Rendered link.
+ */
+function _gsas_core_make_node_link($nid, $title) {
+  return render(
+    Link::createFromRoute(
+      $title,
+      'entity.node.canonical',
+      [
+        'node' => $nid,
+      ])->toRenderable()
+  );
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function gsas_core_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  $view_mode = $variables['view_mode'];
+
+  if (($view_mode === 'full') && ($node->getType() == 'events')) {
+    // Get google maps url from the Location field.
+    $location = $node->get('field_event_location')->getValue();
+    preg_match_all('@((https?://)?([-\\w]+\\.[-\\w\\.]+)+\\w(:\\d+)?(/([-\\w/_\\.]*(\\?\\S+)?)?)*)@', $location[0]['value'], $url_match);
+    $url = $url_match[0][0];
+    $variables['content']['location_map']['#markup'] = $url;
+
+    // Delete map url from the Location field, trim text.
+    $location_text = $variables['content']['field_event_location'][0]['#text'];
+    $location_text = str_replace($url, '', $location_text);
+    $location_text = rtrim($location_text);
+    $location_text = rtrim($location_text, ", \t\n");
+    $variables['content']['field_event_location'][0]['#text'] = $location_text;
+  }
+}

@@ -1,0 +1,34 @@
+name: GSAS
+type: theme
+description: Columbia GSAS.
+version: 1.x
+core: 8.x
+base theme: stable
+libraries-override:
+  core/html5shiv: false
+libraries:
+  - gsas/styles
+  - gsas/formstone
+  - gsas/mediaquery
+  - gsas/equalize
+  - gsas/swiper
+  - gsas/modernizr
+  - gsas/scripts
+  - gsas/dropdown
+
+regions:
+  branding: 'Branding'
+  header: 'Header'
+  search: 'Search'
+  navigation: 'Navigation'
+  breadcrumb: 'Breadcrumb'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  content: 'Content'
+  content_extra: 'Content Extra'
+  sidebar_first: 'Sidebar First'
+  sidebar_second: 'Sidebar Second'
+  footer: 'Footer'
+
+libraries-override:
+  core/modernizr: gsas/modernizr

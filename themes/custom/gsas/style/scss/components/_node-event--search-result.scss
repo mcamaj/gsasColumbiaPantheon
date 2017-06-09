@@ -1,0 +1,205 @@
+// Node Event: Viewmode: Search Result // Used on Events Landing CT
+.node--type-events.node--view-mode-search-result {
+  @include clearfix;
+
+  .fields-date {
+    font-size: rem(13);
+    @include line-height(13, 15);
+    color: $color-cello;
+    font-family: $fontSansSerifMd;
+    @include margin(0 0 20px);
+
+    > .field {
+      display: inline-block;
+    }
+
+    .field--name-field-event-start-date {
+
+      @include media($bp768) {
+        float: left;
+        width: 15%;
+        color: $color-black;
+        line-height: 1;
+      }
+
+      @include media($bp1280) {
+        width: 12%;
+      }
+
+      div {
+        display: inline-block;
+      }
+
+      .month {
+        display: none;
+
+        @include media($bp768) {
+          display: block;
+          font-size: rem(16);
+          @include margin(0 0 10px);
+          font-family: $fontSansSerif;
+        }
+
+        @include media($bp1280) {
+          font-size: rem(18);
+        }
+      }
+
+      .month-short {
+        @include margin(0 5px 0 0);
+
+        @include media($bp768) {
+          display: none;
+        }
+      }
+
+      .day {
+
+        @include media($bp768) {
+          font-size: rem(48);
+          font-family: $fontSansSerifMd;
+        }
+
+        @include media($bp1280) {
+          font-size: rem(60);
+        }
+      }
+    }
+
+    .field--name-field-event-start-time {
+      @include margin(0 0 0 8px);
+
+      &:before {
+        content: "|";
+        font-family: $fontSansSerifLt;
+        opacity: .3;
+        @include margin(0 10px 0 0);
+      }
+    }
+
+    .field--name-field-event-end-time {
+
+      &:before {
+        content: "-";
+        @include margin(0 2px 0 0);
+      }
+    }
+
+
+    // When mobile and above 768
+    &.mobile {
+
+      .field--name-field-event-end-time,
+      .field--name-field-event-start-time,
+      .field--name-field-event-end-date {
+
+        @include media($bp768) {
+          display: none;
+        }
+      }
+    }
+
+    // When desktop and above 768
+    &.desktop {
+      display: none;
+
+      @include media($bp768) {
+        display: block;
+        @include margin(0 0 15px);
+      }
+
+      .field--name-field-event-start-time {
+        margin: 0;
+
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .field--name-field-image {
+    float: right;
+    width: 32.4%;
+    @include margin(0 0 10px 20px);
+
+    @include media($bp768) {
+      width: 28%;
+      margin: 0;
+    }
+  }
+
+  .group-text {
+
+    @include media($bp768) {
+      float: left;
+      width: 52%;
+    }
+
+    @include media($bp1280) {
+      width: 55%;
+    }
+  }
+
+  h2.node-title {
+    font-size: rem(18);
+    @include line-height(18, 22);
+    font-family: $fontSansSerifMd;
+    @include margin(0 0 20px);
+
+    @include media($bp768) {
+      font-size: rem(20);
+      @include line-height(20, 24);
+    }
+
+    @include media($bp1280) {
+      font-size: rem(24);
+      @include line-height(24, 28);
+      @include margin(0 0 25px);
+    }
+  }
+
+  .field--name-field-event-location {
+    font-family: $fontSansSerifLt;
+    font-size: rem(14);
+    line-height: 1.5;
+    @include margin(0 0 20px);
+
+    @include media($bp1280) {
+      @include margin(0 0 25px);
+    }
+
+    p {
+      display: inline;
+    }
+
+    &:before {
+      content: '';
+      display: inline-block;
+      background: url('../../images/icon-pin-black.svg') 0 0 no-repeat;
+      width: 8px;
+      height: 12px;
+      @include margin(0 6px 0 0);
+    }
+  }
+
+  .field--name-field-event-description,
+  .field--name-field-featured-text {
+    font-size: rem(14);
+    @include line-height(14, 22);
+
+    @include media($bp768) {
+      font-size: rem(16);
+      @include line-height(16, 22);
+    }
+
+    @include media($bp768) {
+      @include line-height(16, 24);
+    }
+  }
+
+  .read-more {
+    @extend .cta;
+    display: none;
+  }
+}

@@ -1,0 +1,18 @@
+<div class="tab-controls">
+  {% for item in items %}
+    {% if items|length > 1 %}
+      <div>
+        <a href="#" data-id="{{ item.name_id }}" class="{{ loop.first ? 'active'}}">
+          {{ item.name }}
+        </a>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+<div class="tabs">
+  {% for item in items %}
+    <div class="tab{{ loop.first ? ' active'}}" data-id="{{ item.name_id }}">
+      {{ item.content }}
+    </div>
+  {% endfor %}
+</div>

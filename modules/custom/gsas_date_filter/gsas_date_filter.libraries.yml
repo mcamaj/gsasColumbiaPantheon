@@ -1,0 +1,15 @@
+moment:
+  title: 'Moment.js'
+  js:
+    /libraries/moment/min/moment.min.js: {}
+
+events_landing_filters:
+  js:
+    js/eventsLandingFilters.js: {}
+  dependencies:
+    - gsas_date_filter/moment
+blog_landing_filters:
+  js:
+    js/blogLandingFilters.js: {}
+  dependencies:
+    - gsas_date_filter/moment

@@ -1,0 +1,524 @@
+.hdr-global {
+  background: $color-white;
+  font-family: $fontSansSerifMd;
+  font-weight: normal;
+  line-height: normal;
+
+  @include media($bp960max) {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+  }
+
+  @include media($bp960) {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  &.menu-open {
+    overflow-y: auto;
+    height: 100vh;
+
+    .touchevents & {
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  > div {
+    @include max-width-container;
+    height: 70px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+
+    @include media($bp960) {
+      height: 89px;
+      position: relative;
+      padding-right: 59px;
+      border: 0;
+    }
+
+    @include media($bp1280) {
+      padding-right: 50px;
+    }
+  }
+
+  button {
+    border: 0;
+    padding: 0;
+  }
+
+  .btn-search,
+  .btn-menu {
+    @include size(45px);
+    @include hide-text;
+    position: absolute;
+    top: 12px;
+  }
+
+  .btn-search {
+    right: 50px;
+    background: url(/themes/custom/gsas/images/icon-search.svg) 50% 50%/20px 20px no-repeat;
+
+    @include media($bp580) {
+      right: 69px;
+    }
+
+    @include media($bp960) {
+      @include size(30px);
+      top: 30px;
+      right: 27px;
+    }
+
+    @include media($bp1280) {
+      right: 0;
+    }
+  }
+
+  &.menu-active .btn-search {
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .btn-menu {
+    right: 5px;
+    background: url(/themes/custom/gsas/images/icon-menu.svg) 50% 50%/21px 17px no-repeat;
+
+    @include media($bp580) {
+      right: 18px;
+    }
+
+    @include media($bp960) {
+      display: none;
+    }
+  }
+
+  &.search-open .btn-search,
+  &.menu-active .btn-menu {
+    background-image: url(/themes/custom/gsas/images/icon-close.svg);
+    background-size: 20px 20px;
+  }
+
+  #block-gsassearchblock {
+    background: $color-cardinal;
+    padding: 15px 1px 15px 16px;
+    position: absolute;
+    width: 100%;
+    top: 70px;
+    display: none;
+
+    @include media($bp580) {
+      padding-right: 16px;
+      padding-left: 30px;
+    }
+
+    @include media($bp960) {
+      top: 90px;
+    }
+
+    @include media($bp1280) {
+      margin-left: -30px;
+      width: calc(100% + 50px);
+    }
+
+    form {
+      @include clearfix;
+    }
+
+    .js-form-item {
+      float: left;
+      width: calc(100% - 74px);
+
+      @include media($bp960) {
+        width: calc(100% - 83px);
+      }
+    }
+
+    .form-actions {
+      float: right;
+    }
+
+    input.form-search {
+      height: 60px;
+      width: 100%;
+      border: 0;
+      font-size: rem(16);
+      padding-left: 15px;
+      font-family: $fontSansSerif;
+
+      @include media($bp580) {
+        font-size: rem(24);
+      }
+
+      @include media($bp960) {
+        padding-left: 40px;
+      }
+    }
+
+    input.form-submit {
+      height: 60px;
+      width: 60px;
+      border: 0;
+      background: none;
+      font-size: rem(20);
+      text-transform: uppercase;
+      color: $color-white;
+      font-family: $fontSansSerif;
+    }
+  }
+
+  &.search-open #block-gsassearchblock {
+    display: block;
+    z-index: 1000;
+  }
+}
+
+
+#block-gsas-branding {
+  position: absolute;
+  top: 15px;
+  left: 5%;
+
+  @include media($bp580) {
+    left: 30px;
+  }
+
+  @include media($bp960) {
+    top: 20px;
+  }
+
+  @include media($bp1280) {
+    left: 0;
+  }
+
+  #gsas-logo {
+    width: 131px;
+    height: 40px;
+
+    @include media($bp960) {
+      width: 162px;
+      height: 50px;
+    }
+  }
+}
+
+
+nav[id^="block-mainnavigation-2"] {
+  font-size: rem(20);
+
+  @include media($bp960max) {
+    display: none;
+    background: $color-white;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    height: calc(100vh - 70px);
+  }
+
+  @include media($bp580) {
+    font-size: rem(30);
+  }
+
+  @include media($bp960) {
+    font-size: rem(15);
+    float: right;
+  }
+
+  @include media($bp1280) {
+    font-size: rem(18);
+  }
+
+  button {
+    height: 50px;
+    width: 50px;
+    background: none;
+    float: right;
+    position: relative;
+
+    @include media($bp580) {
+      height: 60px;
+      width: 80px;
+    }
+
+    @include media($bp960) {
+      display: none;
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      background: $color-black;
+      width: 14px;
+      height: 2px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -7px;
+      margin-top: -1px;
+    }
+
+    &:after {
+      @include transform (rotate(90deg));
+    }
+  }
+
+  .is-open button:after {
+    content: normal;
+  }
+
+  li {
+
+    a {
+      @include vertical-align-flex;
+      color: inherit;
+      text-decoration: none;
+
+      .no-touchevents & {
+        @include media($bp960max) {
+          transition: color 0.2s;
+
+          &:hover {
+            color: $color-cardinal;
+          }
+        }
+
+        @include media($bp960) {
+          transition: color 0.2s, background-color 0.2s;
+        }
+      }
+
+      &.is-active {
+
+        @include media($bp960) {
+          background-color: $color-cardinal;
+          color: $color-white;
+        }
+      }
+    }
+
+    &.menu-item--active-trail {
+
+      > a {
+
+        @include media($bp960) {
+          background-color: $color-cardinal;
+          color: $color-white;
+        }
+      }
+    }
+  }
+
+  > ul  {
+    padding-top: 13px;
+
+    @include media($bp580) {
+      padding-top: 30px;
+    }
+
+    @include media($bp960) {
+      @include clearfix;
+      padding: 0;
+    }
+
+    > li {
+      @include media($bp960max) {
+        @include clearfix;
+      }
+
+      @include media($bp960) {
+        float: left;
+        position: relative;
+      }
+
+      &.menu-item {
+        .menu-item {
+          a {
+            @include media($bp960) {
+              height: auto;
+              padding: 15px;
+            }
+
+            @include media($bp1280) {
+              padding: 20px;
+            }
+          }
+        }
+      }
+
+      > a {
+        height: 50px;
+        padding-left: 16px;
+        letter-spacing: -0.3px;
+
+        @include media($bp960max) {
+          max-width: calc(100% - 50px);
+          float: left;
+        }
+
+        @include media($bp580-960) {
+          height: 50px;
+          padding-left: 30px;
+          max-width: calc(100% - 85px);
+        }
+
+        @include media($bp960) {
+          height: 90px;
+          padding: 15px;
+        }
+
+        @include media($bp1280) {
+          padding: 15px 20px;
+          letter-spacing: 0.3px;
+        }
+      }
+
+      &:last-child ul {
+        @include media($bp960-1280) {
+          right: 0;
+        }
+      }
+
+      &.is-open {
+        @include media($bp960) {
+          ul {
+            z-index: 3;
+          }
+
+          a {
+            background: $color-cardinal;
+            color: $color-white;
+          }
+        }
+      }
+    }
+
+    ul {
+      display: none;
+      font-size: rem(16);
+
+      @include media($bp960max) {
+        clear: both;
+        padding: 5px 0;
+      }
+
+      @include media($bp580-960) {
+        font-size: rem(18);
+      }
+
+      @include media($bp960) {
+        font-size: rem(14);
+        position: absolute;
+        top: 90px;
+        width: 230px;
+        min-width: 100%;
+        z-index: 2;
+      }
+
+      @include media($bp1280) {
+        font-size: rem(16);
+        width: 245px;
+      }
+
+      ul {
+        visibility: hidden;
+        height: 0;
+        padding: 0;
+      }
+
+      a {
+        padding: 0 16px;
+        height: 44px;
+
+        @include media($bp960max) {
+          font-family: $fontSansSerif;
+        }
+
+        @include media($bp580) {
+          padding: 0 30px;
+        }
+
+        @include media($bp960) {
+          padding: 0 15px;
+          height: 50px;
+          background: $color-cardinal;
+          color: $color-white;
+
+          .no-touchevents &:hover {
+            background: $color-black;
+          }
+        }
+
+        @include media($bp1280) {
+          padding: 0 20px;
+        }
+      }
+    }
+  }
+}
+
+// events landing page
+.page-node-type-events-landing {
+  @include media($bp960) {
+    nav[id^="block-mainnavigation"] {
+      > ul.menu {
+        > li.menu-item--active-trail {
+         > a {
+            background-color: transparent;
+            color: $color-black;
+            transition: color 0.2s;
+
+            &:hover {
+              background-color: $color-cardinal;
+              color: $color-white;
+              transition: color 0.2s, background-color 0.2s;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// home page
+.page-node-type-home-page,
+.path-frontpage {
+  @include media($bp960) {
+    .hdr-global {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      background: none;
+      border-color: transparent;
+
+      #gsas-logo {
+        fill: $color-white;
+      }
+
+      .btn-search {
+        background-image: url(/themes/custom/gsas/images/icon-search.fff.svg);
+      }
+
+      &.search-open .btn-search {
+        background-image: url(/themes/custom/gsas/images/icon-close.fff.svg);
+      }
+    }
+
+    nav[id^="block-mainnavigation"] {
+      color: $color-white;
+    }
+  }
+}
+
+// user logged in
+
+.user-logged-in {
+  &.page-node-type-home-page,
+  &.path-frontpage {
+    .hdr-global {
+      top: 36px;
+      @include media($bp960) {
+        top: 134px;
+      }
+    }
+  }
+}

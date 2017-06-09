@@ -1,0 +1,47 @@
+// View Mode: Story Menu (on Story Menu Page)
+// Article CT, Blog CT
+.node--view-mode-story-menu {
+
+  .node-content.no-image {
+    border-bottom: 1px solid $color-white;
+  }
+
+  .group-text {
+    position: relative;
+    @include padding(30px 15px 50px);
+
+    @include media($bp580){
+      @include padding(49px 30px);
+    }
+  }
+
+  .field--name-field-category {
+    font-size: rem(14);
+    line-height: 1;
+    font-family: $fontSansSerif;
+    opacity: .7;
+    margin-bottom: rem(30);
+  }
+
+  .field--name-field-featured-text {
+    font-size: rem(16);
+    letter-spacing: rem(-0.1);
+    line-height: 1.7;
+  }
+
+  h2.block-title {
+    font-family: $fontSansSerif;
+    margin-bottom: rem(20);
+  }
+
+  .read-more {
+    @extend .cta;
+    position: absolute;
+    bottom: -25px;
+    left: 15px;
+
+    @include media($bp580){
+      left: 30px;
+    }
+  }
+}

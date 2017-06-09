@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file
+ * GSAS Menu hooks.
+ */
+
+use \Drupal\Core\Menu\MenuLinkBase;
+
+/**
+ * Get root parent link.
+ */
+function _gsas_menu_root_parent_link() {
+  $parent_link = NULL;
+
+  $menu_name = 'main';
+
+  $active_link = \Drupal::service('menu.active_trail')->getActiveLink($menu_name);
+
+  if (!empty($active_link)) {
+    $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+
+    $parents = $menu_link_manager->getParentIds($active_link->getPluginId());
+
+    if (!empty($parents)) {
+      $parent_link = $menu_link_manager->createInstance(end(array_keys($parents)));
+    }
+    else {
+      $parent_link = $active_link;
+    }
+  }
+
+  return $parent_link;
+}
+
+/**
+ * Get rendered child links of supplied menu link.
+ *
+ * @param MenuLinkBase $menu_link
+ *   Parent menu item.
+ *
+ * @return \Drupal\Core\Menu\MenuLinkTreeElement[]
+ *   List of children menu items.
+ */
+function _gsas_menu_menu_link_children(MenuLinkBase $menu_link) {
+  $menu_tree = \Drupal::menuTree();
+  $menu_name = 'main';
+
+  $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
+
+  $parameters->setRoot($menu_link->getPluginId());
+
+  // Adjust the menu tree parameters to retrieve second level children:
+  $level = 1;
+  $depth = 1;
+
+  $parameters->setMinDepth($level);
+
+  // When the depth is configured to zero, there is no depth limit. When depth
+  // is non-zero, it indicates the number of levels that must be displayed.
+  // Hence this is a relative depth that we must convert to an actual
+  // (absolute) depth, that may never exceed the maximum depth.
+  if ($depth > 0) {
+    $parameters->setMaxDepth(min($level + $depth - 1, $menu_tree->maxDepth()));
+  }
+
+  // Load the tree based on this set of parameters.
+  $tree = $menu_tree->load($menu_name, $parameters);
+
+  // Transform the tree using the manipulators you want.
+  $manipulators = array(
+    // Use the default sorting of menu links.
+    array('callable' => 'menu.default_tree_manipulators:generateIndexAndSort'),
+    // Only show links that are accessible for the current user.
+    array('callable' => 'menu.default_tree_manipulators:checkAccess'),
+  );
+  $tree = $menu_tree->transform($tree, $manipulators);
+
+  return $menu_tree->build($tree);
+}

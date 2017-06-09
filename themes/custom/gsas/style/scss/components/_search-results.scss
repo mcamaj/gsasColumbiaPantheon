@@ -1,0 +1,420 @@
+.path-search {
+  .layout-content {
+    @include media($bp960) {
+      max-width: none;
+    }
+  }
+
+  .views-element-container {
+    .form-container {
+      background-color: $color-cello;
+
+      @include media($bp768){
+        padding-bottom: 35px;
+      }
+    }
+  }
+
+  .search-header {
+    @include max-width-container;
+    padding: 20px 5%;
+
+    @include media($bp580) {
+      @include padding(35px 30px);
+    }
+
+    @include media($bp960) {
+      @include padding(45px 30px);
+    }
+
+    @include media($bp1280) {
+      @include padding(45px 0 35px);
+    }
+
+    h2 {
+      font-family: $fontSansSerifMd;
+      font-weight: normal;
+      font-size: rem(32);
+      width: 200px;
+      margin: 0;
+      line-height: 1.1;
+
+      @include media($bp580) {
+        font-size: rem(55);
+        width: 300px;
+      }
+
+      @include media($bp960) {
+        font-size: rem(65);
+      }
+    }
+  }
+}
+
+#views-exposed-form-search-results {
+  display: none;
+  padding: 30px 5%;
+  @include max-width-container;
+
+  @include media($bp580) {
+    padding: 30px;
+  }
+
+  @include media($bp1280) {
+    padding: 60px 0 30px;
+  }
+
+  &.loaded {
+    display: block;
+  }
+
+  .js-form-item,
+  .form-actions {
+    line-height: 1;
+    display: block;
+  }
+
+  .js-form-type-select {
+    display: block;
+    @include clearfix;
+
+    label {
+      display: block;
+      color: $color-white;
+      font-family: $fontSansSerif;
+      padding: 30px 0 10px;
+      font-size: rem(16);
+
+      @include media($bp960) {
+        font-size: rem(20);
+        padding: 40px 0 8px;
+      }
+    }
+
+    .radio-buttons {
+      display: none;
+
+      @include media($bp960) {
+        display: block;
+        margin: 25px 0;
+      }
+
+      div {
+        position: relative;
+        float: left;
+        margin-bottom: 20px;
+
+        .button {
+          display: inline-block;
+          background: $color-white;
+          height: 25px;
+          width: 25px;
+          border-radius: 50%;
+          border: 3px solid $color-white;
+          margin-right: 12px;
+          position: static;
+
+          &:hover {
+            background:  $color-cardinal;
+            cursor: pointer;
+          }
+
+          &.selected {
+            background:  $color-cardinal;
+          }
+        }
+
+        .text {
+          color: $color-white;
+          font-family: $fontSansSerif;
+          font-size: rem(18);
+          padding-right: 30px;
+          line-height: 25px;
+          vertical-align: top;
+        }
+      }
+    }
+
+    .fs-dropdown {
+      display: block;
+
+      @include media($bp580) {
+        width: 50%;
+      }
+
+      @include media($bp960) {
+        display: none;
+      }
+    }
+  }
+
+  .js-form-type-textfield {
+    width: calc(100% - 70px);
+    float: left;
+
+    @include media($bp960) {
+      width: calc(100% - 100px);
+    }
+
+    label {
+      display: none;
+    }
+
+    input {
+      height: 50px;
+      width: 100%;
+      padding: 0 10px;
+      font-size: rem(16);
+
+      @include media($bp580) {
+        height: 60px;
+      }
+
+      @include media($bp960) {
+        height: 70px;
+        padding: 0 28px;
+        font-size: rem(24);
+      }
+    }
+  }
+
+  input[type="submit"] {
+    background: $color-cardinal;
+    color: $color-white;
+    text-transform: uppercase;
+    height: 50px;
+    width: 70px;
+    font-family: $fontSansSerifLt;
+    font-size: rem(16);
+
+    @include media($bp580) {
+      height: 60px;
+    }
+
+    @include media($bp960) {
+      height: 70px;
+      width: 100px;
+      font-size: rem(18);
+    }
+  }
+
+  .fs-dropdown-selected {
+    position: relative;
+    background-color: $color-white;
+    cursor: pointer;
+    width: 100%;
+    height: 44px;
+    @include padding(0 20px);
+    border: 0;
+
+    &:before {
+      content: '';
+      background-color: $color-cardinal;
+      width: 44px;
+      height: 44px;
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: right $transition-speed $transition-timing;
+      z-index: 10;
+    }
+
+    &:after {
+      content: '';
+      background: url('/themes/custom/gsas/images/icon-arrow-down-white.svg') 0 0 no-repeat;
+      width: 11px;
+      height: 13px;
+      display: block;
+      position: absolute;
+      right: 17px;
+      top: 50%;
+      margin-top: -7px;
+      transition: right $transition-speed $transition-timing;
+      z-index: 20;
+
+      @include media($bp960){
+        right: 20px;
+      }
+    }
+  }
+
+  .fs-dropdown-options {
+
+    .fs-dropdown-item {
+      @include padding(10px 20px);
+
+      &:hover {
+        background-color: $color-light-gray;
+      }
+    }
+  }
+}
+
+.view-search.view-display-id-results {
+
+  .view-container {
+    background-color: $color-white;
+    @include padding(15px 0 40px);
+
+    @include media($bp768){
+      @include padding(35px 0 20px);
+      @include margin(-40px 30px 0);
+    }
+
+    @include media($bp1280){
+      @include max-width-container;
+      @include margin(-40px auto 0);
+    }
+
+    .search-result {
+      @include clearfix;
+      position: relative;
+      border-bottom: 1px solid $color-light-gray;
+      padding: 20px 5%;
+
+      @include media($bp580) {
+        @include padding(20px 30px);
+      }
+
+      @include media($bp768) {
+        @include padding(30px);
+      }
+
+      @include media($bp1280) {
+        @include padding(40px 30px);
+      }
+
+      .text {
+        @include media($bp768) {
+          width: 71%;
+          padding-right: 10%;
+          float: left;
+        }
+
+        .category {
+          font-family: $fontSansSerif;
+          text-transform: uppercase;
+          font-size: rem(12);
+          margin-left: rem(2);
+          margin-bottom: rem(8);
+        }
+
+        .title {
+          @include clearfix;
+          margin-bottom: rem(24);
+
+          @include media($bp580) {
+            margin-bottom: rem(38);
+          }
+
+          @include media($bp580) {
+            margin-bottom: rem(16);
+          }
+
+          .title-text {
+            width: 66%;
+            float: left;
+            padding-right: 5%;
+            margin-bottom: 0;
+
+            @include media($bp768) {
+              width: 100%;
+              padding-right: 0;
+              float: none;
+            }
+          }
+
+          h2 {
+            font-family: $fontSansSerifMd;
+            font-weight: normal;
+            font-size: rem(18);
+            margin-bottom: 0;
+
+            @include media($bp580) {
+              font-size: rem(24);
+            }
+
+            @include media($bp768) {
+              font-size: rem(30);
+            }
+          }
+
+          .field--name-field-image {
+            width: 33%;
+            float: right;
+            margin-top: 4px;
+
+            @include media($bp768) {
+              display: none;
+            }
+          }
+        }
+
+        .event-info {
+          margin-top: 12px;
+
+          .time {
+            display: inline-block;
+            margin-right: 14px;
+          }
+
+          .location {
+            display: inline-block;
+          }
+
+          .field {
+            display: inline-block;
+            font-family: $fontSansSerifLt;
+            font-size: rem(14);
+            margin-left: 2px;
+          }
+
+          .field--name-field-event-start-time {
+            margin-left: 3px;
+          }
+
+          .field--name-field-event-end-time {
+            &:before {
+              content: "- ";
+            }
+          }
+
+          .field--name-field-event-location {
+            p {
+              display: inline;
+            }
+            &:before {
+              content: '';
+              display: inline-block;
+              background: url('../../images/icon-pin-black.svg') 0 0 no-repeat;
+              width: 8px;
+              height: 12px;
+              @include margin(0 6px 0 0);
+            }
+          }
+        }
+
+        .field--name-field-featured-text,
+        .field--name-field-event-description {
+          font-size: rem(13);
+
+          @include media($bp768) {
+            font-size: rem(15);
+            margin-left: 2px;
+          }
+        }
+      }
+
+      .image {
+        display: none;
+
+        @include media($bp768) {
+          display: block;
+          float: right;
+          width: 29%;
+        }
+      }
+    }
+  }
+}

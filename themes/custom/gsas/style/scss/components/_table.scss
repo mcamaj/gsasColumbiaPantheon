@@ -1,0 +1,83 @@
+.node--type-article,
+.node--type-blog {
+  table {
+    font-family: $fontSansSerif;
+    font-size: rem(16);
+    @include line-height(16, 22);
+    width: 100%;
+    border: 1px solid $color-gainsboro;
+    table-layout: fixed;
+    margin-bottom: rem(30);
+
+    thead,
+    caption {
+      background-color: $color-zircon;
+      text-align: left;
+      font-family: $fontSansSerifBld;
+    }
+
+    thead {
+      display: none;
+
+      @include media($bp768) {
+        display: table-header-group;
+      }
+
+      th {
+        background: $color-cello;
+        color: $color-white;
+        font-family: $fontSansSerifBld;
+        font-size: rem(15);
+        padding: 15px 20px;
+        border-right: 1px solid $color-gainsboro;
+
+        &:last-child {
+          border-right: 0;
+        }
+      }
+    }
+
+    tbody {
+
+      tr {
+        &:nth-child(2n) {
+          background-color: $color-porcelain;
+        }
+        td {
+          text-align: left;
+          display: block;
+          padding: 25px 6% 0;
+          font-size: rem(14);
+
+          &:last-child {
+            padding-bottom: 25px;
+          }
+
+          @include media($bp768) {
+            display: table-cell;
+            padding: 20px;
+            border-right: 1px solid $color-gainsboro;
+
+            &:last-child {
+              border-right: 0;
+            }
+          }
+
+          ul, ol {
+            @include margin(0 0 0 10px);
+          }
+
+          .header {
+            font-family: $fontSansSerifBld;
+            color: $color-cello;
+            margin-bottom: rem(12);
+
+            @include media($bp768) {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

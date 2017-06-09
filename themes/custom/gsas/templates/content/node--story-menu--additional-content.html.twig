@@ -1,0 +1,28 @@
+{%
+set classes = [
+'node',
+'node--type-' ~ node.bundle|clean_class,
+node.isPromoted() ? 'node--promoted',
+node.isSticky() ? 'node--sticky',
+not node.isPublished() ? 'node--unpublished',
+view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+]
+%}
+<article{{ attributes }}>
+    <a href="{{ url }}" rel="bookmark">
+        {% if content.field_teaser_image|render|trim %}
+            {{ content.field_teaser_image }}
+        {% else %}
+        <div class="field--name-field-teaser-image">
+            <img src="/themes/custom/gsas/images/placeholder.png">
+        </div>
+        {% endif %}
+
+        <div class="info">
+            <h3{{ title_attributes }}>{{ label }}</h3>
+            <p>{{ content.field_teaspoon }}</p>
+            <p>{{ content.field_blurb }}</p>
+        </div>
+    </a>
+
+</article>

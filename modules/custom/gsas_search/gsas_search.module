@@ -1,0 +1,30 @@
+<?php
+/**
+ * @file
+ * Main file for GSAS Search.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function gsas_search_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  if ($form_id == 'views_exposed_form') {
+    // Exposed filters form fixes to match the template.
+    if (strpos($form['#id'], 'views-exposed-form-search-results') !== FALSE) {
+      $form['type']['#options']['blog'] = 'Blog Posts';
+      $form['type']['#options']['events'] = 'Events';
+      unset($form['type']['#options']['basic_page']);
+      unset($form['type']['#options']['blog_landing']);
+      unset($form['type']['#options']['events_landing']);
+      unset($form['type']['#options']['home_page']);
+      unset($form['type']['#options']['article']);
+      unset($form['type']['#options']['features_page']);
+      unset($form['type']['#options']['resource_page']);
+      unset($form['type']['#options']['story_menu']);
+      unset($form['type']['#options']['category']);
+    }
+  }
+}

@@ -1,0 +1,241 @@
+// Blog Views Filter on Blog Landing
+#block-views-block-blog-landing-list-block-1 {
+
+  .blog-filter-wrapper {
+    background-color: $color-cello;
+    @include padding(35px 0 25px);
+    color: $color-white;
+    font-family: $fontSansSerif;
+
+    @include media($bp768){
+      @include padding(40px 30px 60px);
+    }
+
+    @include media($bp1280){
+      @include padding(50px 0 70px);
+    }
+
+    .inner {
+      position: relative;
+      @include layout;
+      @include clearfix;
+
+      @include media($bp768){
+        padding: 0;
+      }
+
+      @include media($bp1280){
+        @include max-width-container;
+      }
+    }
+
+    .view-header {
+      @include margin(0 0 20px);
+
+      @include media($bp768){
+        @include margin(0 0 25px);
+      }
+
+      h2 {
+        margin: 0;
+        font-family: $fontSansSerif;
+        font-size: rem(20);
+        line-height: 1;
+        letter-spacing: rem(0.6);
+      }
+    }
+
+    .view-filters {
+
+      .form-item.js-form-item-category {
+        @include margin(0 0 15px);
+        width: 100%;
+
+        @include media($bp768){
+          width: 400px;
+          float: left;
+          vertical-align: top;
+          @include margin(0 10px 0 0);
+        }
+
+        @include media($bp960){
+          width: 445px;
+        }
+
+        label {
+          display: none;
+        }
+
+        .fs-dropdown-selected {
+          position: relative;
+          background-color: $color-white;
+          cursor: pointer;
+          width: 100%;
+          height: 44px;
+          @include padding(0 20px);
+          border: 0;
+
+          @include media($bp768){
+            height: 50px;
+          }
+
+          &:before {
+            content: '';
+            background-color: $color-cardinal;
+            width: 44px;
+            height: 44px;
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: right $transition-speed $transition-timing;
+            z-index: 10;
+
+            @include media($bp768){
+              width: 50px;
+              height: 50px;
+            }
+          }
+
+          &:after {
+            content: '';
+            background: url('../../images/icon-arrow-down-white.svg') 0 0 no-repeat;
+            width: 11px;
+            height: 13px;
+            display: block;
+            position: absolute;
+            right: 17px;
+            top: 50%;
+            margin-top: -7px;
+            transition: right $transition-speed $transition-timing;
+            z-index: 20;
+            @include media($bp768){
+              right: 20px;
+            }
+          }
+        }
+
+        .fs-dropdown-options {
+
+          .fs-dropdown-item {
+            @include padding(10px 20px);
+              background-color: $color-white-smoke;
+
+            &:hover {
+              background-color: $color-black;
+              color: $color-white;
+            }
+          }
+        }
+      }
+
+      .form-item-gsas-events-date-select {
+        @extend .form-item.js-form-item-category;
+
+        @include media($bp768){
+          width: 228px;
+        }
+      }
+
+      .form-item.js-form-item-created-start {
+        position: relative;
+        @include margin(0 0 15px);
+        width: 100%;
+
+        // Temporary
+        display: none;
+
+        @include media($bp768){
+          width: 228px;
+          float: left;
+          vertical-align: top;
+          @include padding(0 10px 0 0);
+        }
+
+        input.form-text {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+      .form-item.js-form-item-created-thru {
+        @extend .form-item.js-form-item-created-start;
+
+      }
+
+      .form-actions {
+        display: none;
+
+        .form-submit[value="Reset All"] {
+          border: 0;
+          background: transparent;
+          padding: 0;
+          color: $color-white;
+          font-size: rem(14);
+          text-decoration: underline;
+          position: absolute;
+          top: 4px;
+          right: 0;
+          margin-left: 25px;
+
+          @include media($bp1280){
+            position: relative;
+            top: auto;
+            right: auto;
+            height: 50px;
+            line-height: 50px;
+          }
+        }
+      }
+    }
+  }
+
+  .blog-content-wrapper {
+    @include layout;
+    @include clearfix;
+    @include max-width-container;
+
+    @include media($bp960){
+      @include padding(0 30px);
+    }
+
+    @include media($bp1280){
+      padding: 0;
+    }
+
+    .view-content {
+      position: relative;
+      background-color: $color-white;
+      @include padding(15px 0 40px);
+
+      @include media($bp768){
+        @include padding(35px 0 20px);
+        @include margin(-40px 0 0);
+      }
+
+      .view-container {
+        border-bottom: 1px solid $color-gainsboro;
+
+        &:last-child {
+          border: 0;
+        }
+      }
+
+      .views-row {
+        @include padding(20px 0);
+        border-bottom: 1px solid $color-gainsboro;
+
+        @include media($bp768){
+          @include padding(30px);
+        }
+
+        @include media($bp1280){
+          @include padding(40px 30px);
+        }
+
+        &:last-child {
+          border: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+
+  <div{{ content_attributes.addClass('node-content') }}>
+
+    <div class="fields-category">
+
+      {{ content.field_category }}
+
+    </div>
+
+    {{ content.field_teaser_image }}
+
+    <h2{{ title_attributes.addClass('node-title') }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+
+    {{ content.field_featured_text }}
+
+    <div class="read-more">
+      <a href="{{ url }}" rel="bookmark">{{ 'Read More'|t }}</a>
+    </div>
+
+  </div>
+
+</article>

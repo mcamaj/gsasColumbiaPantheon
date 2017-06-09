@@ -1,0 +1,5 @@
+name: GSAS Menu
+type: module
+description: Custom Menu hooks for GSAS
+core: 8.x
+package: GSAS

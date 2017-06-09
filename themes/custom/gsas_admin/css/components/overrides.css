@@ -1,0 +1,20 @@
+/* improve spacing for nested inline entity form: */
+tr.odd .field--widget-inline-entity-form-complex .form-item,
+tr.even .field--widget-inline-entity-form-complex .form-item {
+  margin: 1em 0;
+}
+
+/* hide long text filter tips */
+ul.tips {
+  display: none;
+}
+
+/* hide formatted text filter selection entirely */
+.field--type-text .filter-wrapper {
+  display: none;
+}
+
+/* add margin to text field form elements */
+.field--type-text {
+  margin-bottom: 1em;
+}

@@ -1,0 +1,38 @@
+<div class="faces-and-facets-container">
+  <h2>{{ label }}</h2>
+  <div class="swiper">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        {% for item in items %}
+          <div class="swiper-slide">{{ item.content }}</div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="content-container">
+      <div class="content-container-inner">
+        <div class="swiper-content-container">
+          <div class="swiper-wrapper">
+            {% for item in items %}
+              <div class="swiper-slide {{ item.quote ? 'has-quote' }}">
+                {% if item.url %}
+                  <a href="{{ item.url }}">
+                {% endif %}
+                <span class="quote">{% set text = item.title|render|striptags %}
+                {{ text|length > 120 ? text|slice(0, 120) ~ '...' : text }}</span>
+                <span class="name">{{ item.subject_name }}</span>
+                <span class="title">{{ item.subject_title }}</span>
+                {% if item.url %}
+                  </a>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-buttons-container">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

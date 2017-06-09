@@ -1,0 +1,19 @@
+$bp580: 580px;
+$bp768: 768px;
+$bp960: 960px;
+$bp1024: 1024px;
+$bp1200: 1200px;
+$bp1280: 1280px;
+$bp1680: 1680px;
+
+$bp580max: max-width 579px;
+$bp768max: max-width 767px;
+$bp960max: max-width 959px;
+$bp1280max: max-width 1279px;
+
+$bp580-768: min-width 580px max-width 767px;
+$bp580-960: min-width 580px max-width 959px;
+$bp580-1280: min-width 580px max-width 1279px;
+$bp768-960: min-width 768px max-width 959px;
+$bp768-1280: min-width 768px max-width 1279px;
+$bp960-1280: min-width 960px max-width 1279px;

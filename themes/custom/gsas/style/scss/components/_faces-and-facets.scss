@@ -1,0 +1,273 @@
+.faces-and-facets-container {
+  @include max-width-container-wide;
+  @include padding(50px null null null);
+  font-family: $fontSansSerif;
+
+  @include media($bp580) {
+    @include padding(60px null null null);
+  }
+
+  @include media($bp960) {
+    @include padding(80px null null null);
+  }
+
+  @include media($bp1280) {
+    @include padding(100px null null null);
+  }
+
+  h2 {
+    flex: 1;
+    font-size: rem(30);
+    font-family: $fontSansSerifMd;
+    font-weight: normal;
+    line-height: 1;
+    position: relative;
+    letter-spacing: -0.6px;
+    margin: 0;
+    @include padding(20px 10px 24px 5%);
+
+    @include media($bp580) {
+      @include padding(25px null null null);
+      font-size: rem(40);
+      width: auto;
+    }
+
+    @include media($bp768) {
+      display: block;
+      font-size: rem(44);
+      text-align: center;
+      @include padding(25px 0 35px);
+    }
+
+    @include media($bp960) {
+      font-size: rem(48);
+      @include padding(25px 0 45px);
+    }
+
+    @include media($bp1280) {
+      font-size: rem(55);
+      @include padding(30px 0 32px);
+    }
+
+    &:after {
+      content: '';
+      width: 50px;
+      height: 2px;
+      background: $color-black;
+      position: absolute;
+      top: 0;
+      left: 5%;
+
+      @include media($bp768) {
+        left: calc(50% - 25px);
+      }
+    }
+  }
+
+  .swiper {
+    position: relative;
+  }
+
+  .content-container {
+    position: relative;
+    @include layout;
+    margin-top: -20px;
+    z-index: 2;
+    cursor: pointer;
+
+    @include media($bp580) {
+      padding: 0 5%;
+    }
+
+    @include media($bp768) {
+      padding: 0 30px;
+    }
+
+    @include media($bp960) {
+      margin-top: 0;
+      position: absolute;
+      z-index: 1;
+      height: calc(100% + 40px);
+      top: 50%;
+      left: 50%;
+      @include centerer;
+      width: 100%;
+      margin: auto;
+      padding: 0;
+      min-height: 385px;
+    }
+
+    @include media($bp1280) {
+      height: calc(100% + 50px);
+    }
+
+    .content-container-inner {
+      position: relative;
+      background-color: $color-cello;
+
+      @include media($bp960) {
+        width: calc(35% - 36px);
+        height: 100%;
+        right: 30px;
+        margin-left: auto;
+      }
+
+      @include media($bp1280) {
+        width: calc(36.3% - 36px);
+        right: 0;
+      }
+    }
+
+    .swiper-content-container {
+      height: 100%;
+      position: relative;
+
+      .swiper-slide {
+        text-align: center;
+        @include padding(20px 20px 50px);
+        color: $color-white;
+
+        @include media($bp580) {
+          @include padding(60px 25px 60px);
+        }
+
+        @include media($bp960) {
+          text-align: left;
+          @include padding(40px 40px 50px);
+        }
+
+        &.has-quote {
+          @include padding(60px 25px 55px);
+
+          @include media($bp580) {
+            @include padding(60px 30px 55px);
+          }
+
+          @include media($bp960) {
+            @include padding(70px 30px 75px);
+          }
+
+          @include media($bp1280) {
+            @include padding(80px null null);
+          }
+
+          &:before {
+            content: '';
+            background: url('../../images/icon-quote.svg') 0 0 no-repeat;
+            width: 25px;
+            height: 21px;
+            display: block;
+            opacity: 0.3;
+            top: 20px;
+            @include centerer($horizontal: true, $vertical: false);
+
+            @include media($bp960) {
+              top: 30px;
+            }
+          }
+        }
+
+        a {
+          color: $color-white;
+          display: block;
+          text-decoration: none;
+        }
+
+        .quote {
+          display: block;
+          font-family: $fontSansSerifLt;
+          font-size: rem(18);
+          @include line-height(18, 26);
+          font-weight: 100;
+          letter-spacing: 0.5px;
+          margin-bottom: rem(30);
+
+          @include media($bp580) {
+            font-size: rem(20);
+            @include line-height(20, 28);
+          }
+
+          @include media($bp1280) {
+            font-size: rem(22);
+            @include line-height(22, 30);
+          }
+
+          @include media($bp1280) {
+            font-size: rem(30);
+            @include line-height(30, 36);
+          }
+        }
+
+        .name {
+          display: block;
+          font-family: $fontSansSerifMd;
+          font-size: rem(16);
+          @include line-height(16, 22);
+          @include margin(null null 5px null);
+
+          @include media($bp960) {
+            font-size: rem(18);
+            @include line-height(18, 24);
+          }
+
+          @include media($bp768) {
+            font-size: rem(20);
+            @include line-height(20, 26);
+          }
+        }
+
+        .title {
+          display: block;
+          font-size: rem(14);
+          @include line-height(14, 22);
+          font-family: $fontSansSerifLt;
+          letter-spacing: 1.1px;
+
+          @include media($bp960) {
+            line-height: rem(24);
+          }
+        }
+      }
+
+      .swiper-buttons-container {
+        width: 80px;
+        position: absolute;
+        bottom: 14px;
+        z-index: 10;
+        @include centerer($horizontal: true, $vertical: false);
+
+        @include media($bp960) {
+          bottom: 22px;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+          z-index: 1;
+          width: 25%;
+          background-size: 8px;
+          -webkit-transition: background-position $transition-speed $transition-timing;
+          transition: background-position $transition-speed $transition-timing;
+        }
+
+        .swiper-button-prev {
+          left: 0;
+          background-image: url('../../images/icon-swiper-arrow-prev.svg');
+          background-position: 10px 0;
+
+          &:hover {
+            background-position: 0 0;
+          }
+        }
+
+        .swiper-button-next {
+          right: 0;
+          background-image: url('../../images/icon-swiper-arrow-next.svg');
+          background-position: calc(100% - 10px) 0;
+          &:hover {
+            background-position: calc(100% - 5px) 0;
+          }
+        }
+      }
+    }
+  }
+}

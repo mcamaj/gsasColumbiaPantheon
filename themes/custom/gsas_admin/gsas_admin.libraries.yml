@@ -1,0 +1,4 @@
+base:
+  css:
+    component:
+      css/components/overrides.css: { }

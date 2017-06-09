@@ -1,0 +1,52 @@
+.paragraph--type--pull-quote {
+  position: relative;
+  font-family: $fontSansSerifMd;
+  font-size: rem(22);
+  @include line-height(22, 28);
+  text-align: center;
+  margin-bottom: rem(40);
+
+  @include media($bp580){
+    font-size: rem(26);
+    @include line-height(26, 36);
+    margin-bottom: rem(50);
+  }
+
+  @include media($bp960){
+    font-size: rem(30);
+    @include line-height(30, 38);
+    margin-bottom: rem(60);
+  }
+
+  .field--name-field-quote-text {
+    position: relative;
+    margin-bottom: rem(20);
+    @include padding(30px 0 0);
+
+    @include media($bp960){
+      margin-bottom: rem(30);
+    }
+
+    &:before {
+      content: '';
+      background: url('../../images/icon-open-quote.svg') 0 0 no-repeat;
+      width: 30px;
+      height: 25px;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      @include margin(0 0 0 -15px);
+    }
+  }
+
+  .field--name-field-quote-source {
+    margin: 0;
+    font-size: rem(14);
+    @include line-height(14, 18);
+
+    @include media($bp580){
+      font-size: rem(16);
+    }
+  }
+}

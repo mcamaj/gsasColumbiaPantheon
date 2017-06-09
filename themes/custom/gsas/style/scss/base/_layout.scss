@@ -1,0 +1,35 @@
+.max-width-container {
+  @include max-width-container;
+}
+
+body {
+  @include media($bp960max) {
+    padding-top: 70px
+  }
+}
+
+.layout-container {
+  overflow-x: hidden;
+}
+
+.blue-bar {
+  @include media($bp960) {
+    position: relative;
+    z-index: -1;
+    margin: 0 -600rem 25px;
+    /* add back negative margin value */
+    padding: 0.25rem 600rem;
+    background: $color-cello;
+    height: 75px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 600rem;
+      right: 600rem;
+      background: $color-cello;
+    }
+  }
+}

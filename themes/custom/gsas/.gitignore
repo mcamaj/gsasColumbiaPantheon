@@ -1,0 +1,14 @@
+# Node cruft
+npm-debug.log
+
+# Node modules
+node_modules
+
+# Bower components
+bower_components
+
+# Compiled css
+/style/css
+
+# Minified js
+/js/dist

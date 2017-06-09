@@ -1,0 +1,30 @@
+.ajax-progress {
+  background-color: $color-white;
+  @include padding(20px);
+  height: auto;
+  width: auto;
+  background-image: none;
+  opacity: 1;
+  border-radius: 0;
+  text-align: center;
+
+  &:before {
+    content: '';
+    display: block;
+    margin: 0 auto 10px;
+    background-image: url('../../images/icon-loading.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 50px;
+    width: 48px;
+  }
+
+  &:after {
+    content: 'Loading more';
+    display: block;
+    font-size: rem(16);
+    font-family: $fontSansSerifMd;
+    color: $color-empress;
+  }
+}

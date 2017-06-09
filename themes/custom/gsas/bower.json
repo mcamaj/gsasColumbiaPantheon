@@ -1,0 +1,18 @@
+{
+  "name": "Columbia GSAS",
+  "description": "Columbia GSAS",
+  "main": "",
+  "license": "MIT",
+  "homepage": "http://gsas.columbia.edu",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Swiper": "swiper#^3.3.1",
+    "formstone": "^1.1.3"
+  }
+}

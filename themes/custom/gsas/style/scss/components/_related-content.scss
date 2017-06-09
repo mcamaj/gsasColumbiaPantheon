@@ -1,0 +1,323 @@
+// On CT Article, Blog, Resource page
+.field--name-field-related-content {
+  position: relative;
+  color: $color-white;
+  background-color: $color-cello;
+  margin-top: rem(30);
+
+  @include media($bp580) {
+    margin-top: rem(50);
+  }
+
+  @include media($bp768) {
+    margin-top: rem(60);
+    margin-bottom: rem(20);
+
+    &:after {
+      background-color: $color-white;
+      display: block;
+      content: '';
+      height: 140px;
+    }
+  }
+
+  @include media($bp960) {
+    &:after {
+      height: 200px;
+    }
+  }
+
+  @include media($bp1280) {
+    margin-top: rem(80);
+  }
+
+  .paragraph--type--related-content {
+    @include clearfix;
+    @include padding(50px 5% 40px);
+
+    @include media($bp580) {
+      @include padding(60px 30px 40px);
+    }
+
+    @include media($bp768) {
+      @include padding(60px 30px);
+    }
+
+    @include media($bp960) {
+      @include padding(70px 30px);
+    }
+
+    @include media($bp1280) {
+      @include padding(80px 0);
+    }
+  }
+
+  .field--name-field-title {
+    position: relative;
+    font-family: $fontSansSerifMd;
+    font-size: rem(30);
+    line-height: 1.1;
+    @include padding(20px 0 25px);
+
+    @include media($bp580){
+      font-size: rem(40);
+      @include padding(25px 0);
+    }
+
+    @include media($bp768) {
+      text-align: center;
+      font-size: rem(44);
+      @include padding(25px 0 35px);
+    }
+
+    @include media($bp960) {
+      font-size: rem(48);
+      @include padding(25px 0 45px);
+    }
+
+
+    @include media($bp1280) {
+      font-size: rem(55);
+      @include padding(30px 0 45px);
+    }
+
+    &:after {
+      content: '';
+      width: 50px;
+      height: 2px;
+      background: $color-white;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      @include media($bp768) {
+        left: calc(50% - 25px);
+      }
+
+      @include media($bp1280) {
+        top: 4px;
+      }
+    }
+  }
+
+  .related-content {
+    position: relative;
+
+    @include media($bp768){
+      display: flex;
+    }
+
+    @include media($bp1280) {
+      @include max-width-container;
+    }
+
+    &:before {
+
+      @include media($bp768){
+        display: block;
+        border-left: 1px solid rgba($color-black, 0.08%);
+        height: 56%;
+        width: 1px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        content: "";
+        height: 100%;
+      }
+    }
+
+    article {
+      position: relative;
+      border-bottom: 1px solid rgba($color-black, 0.08%);
+      padding-bottom: rem(20);
+      margin-bottom: rem(30);
+
+      @include media($bp768) {
+        border: 0;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        @include padding(0 20px 0 0);
+        margin-bottom: 0;
+      }
+
+      @include media($bp1280) {
+        @include padding(0 40px 0 0);
+      }
+
+      &:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+
+        @include media($bp768) {
+          @include padding(0 0 0 20px);
+        }
+
+        @include media($bp1280) {
+          @include padding(0 0 0 40px);
+        }
+
+        .field--name-field-teaser-image {
+
+          @include media($bp768) {
+            left: rem(20);
+          }
+
+          @include media($bp1280) {
+            left: rem(40);
+          }
+        }
+      }
+
+      .text {
+        position: relative;
+        @include padding(0 20px);
+
+        @include media($bp768){
+          flex-grow: 1;
+          @include padding(0 20px);
+        }
+
+        @include media($bp1280) {
+          @include padding(0 30px);
+        }
+
+        .field--name-field-category {
+          font-family: $fontSansSerifLt;
+          font-size: rem(14);
+          opacity: .7;
+          @include margin(0 0 10px);
+
+          @include media($bp768){
+            @include margin(0 0 15px);
+          }
+
+          a {
+            color: $color-white;
+            text-decoration: none;
+            letter-spacing: rem(1.1);
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+
+        h2 {
+          font-family: $fontSansSerifMd;
+          letter-spacing: rem(0.3);
+          font-size: rem(22);
+          margin-bottom: rem(20);
+
+          @include media($bp768){
+            @include margin(0 0 20px);
+            font-size: rem(25);
+          }
+
+          @include media($bp1280) {
+            font-size: rem(30);
+            line-height: 1.2;
+          }
+        }
+
+        .field--name-field-featured-text {
+          line-height: 1.6;
+          letter-spacing: rem(-0.1);
+          margin-bottom: rem(20);
+
+          @include media($bp768){
+            font-size: rem(16);
+            margin: 0;
+            margin-bottom: rem(60);
+            line-height: 1.5;
+          }
+
+          @include media($bp1280) {
+            margin-bottom: rem(40);
+          }
+        }
+
+        .cta {
+          z-index: 10;
+
+          @include media($bp768) {
+            float: left;
+          }
+
+          @include media($bp1280) {
+            cursor: pointer;
+          }
+
+          a {
+
+            @include media($bp768) {
+              height: 50px;
+            }
+          }
+        }
+      }
+
+      .field--name-field-teaser-image {
+        position: relative;
+
+        @include media($bp768) {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: calc(100% - 20px);
+        }
+
+        @include media($bp1280) {
+          left: 0;
+          width: calc(100% - 40px);
+        }
+
+        a {
+          display: block;
+
+          @include media($bp768) {
+            position: absolute;
+            top: rem(-40);
+            left: 0;
+          }
+
+          @include media($bp1280) {
+            top: rem(-100);
+          }
+        }
+      }
+
+      &.has-image {
+
+        .text {
+          position: relative;
+          padding-bottom: rem(30);
+
+          @include media($bp768){
+            padding-bottom: 0;
+            margin-bottom: rem(40);
+          }
+
+          @include media($bp1280) {
+            padding-bottom: rem(30);
+            margin-bottom: rem(100);
+          }
+        }
+
+        .cta {
+          position: absolute;
+          bottom: rem(-22);
+          left: rem(20);
+
+          @include media($bp580) {
+            bottom: rem(-25);
+          }
+
+          @include media($bp1280) {
+            left: rem(30);
+          }
+        }
+      }
+    } // article
+  }
+}

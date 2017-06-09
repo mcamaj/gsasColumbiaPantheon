@@ -1,0 +1,22 @@
+<div class="text">
+  <div class="kicker">{{ content.field_category }}</div>
+  <h3{{ title_attributes }}>
+    {% if content.field_featured_title|render|trim %}
+      <a href="{{ url }}" rel="bookmark">{{ content.field_featured_title }}</a>
+    {% else %}
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    {% endif %}
+  </h3>
+  <p>{{ content.field_featured_text }}</p>
+  <div class="cta"><a href="{{ url }}">Read More</a></div>
+</div>
+
+{% if content.field_teaser_image|render|trim %}
+  <figure>
+    {{ content.field_teaser_image }}
+  </figure>
+{% else %}
+  <figure>
+    <img src="/themes/custom/gsas/images/placeholder.png">
+  </figure>
+{% endif %}

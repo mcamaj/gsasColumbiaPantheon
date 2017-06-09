@@ -1,0 +1,199 @@
+.node--view-mode-featured-hero {
+  position: relative;
+
+  @include media($bp960) {
+    height: 480px;
+    overflow: hidden;
+  }
+
+  @include media($bp1280) {
+    height: 640px;
+  }
+
+  .field--type-image {
+
+    img {
+      max-width: 100%;
+      @include media($bp960) {
+        min-height: 480px;
+      }
+
+      @include media($bp1280) {
+        min-height: 640px;
+      }
+    }
+
+    @include media($bp960) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  .featured-story-outer {
+    position: relative;
+    margin-bottom: 18px;
+
+    @include media($bp580) {
+      margin-bottom: 30px;
+    }
+
+    @include media($bp960) {
+      @include max-width-container;
+      height: 480px;
+      margin-bottom: 0;
+    }
+
+    @include media($bp1280) {
+      height: 640px;
+    }
+
+    .featured-story-inner {
+      @include media($bp960) {
+        position: absolute;
+        top: 50%;
+        right: 30px;
+        @include transform(translateY(-50%));
+      }
+
+      @include media($bp1280) {
+        right: 0;
+      }
+
+      .left & {
+        @include media($bp960) {
+          left: 30px;
+          right: auto;
+        }
+
+        @include media($bp1280) {
+          left: 0;
+        }
+      }
+    }
+  }
+
+  .featured-story-content {
+    position: relative;
+    background-color: $color-cello;
+    @include margin(-20px 15px 0);
+    color: $color-white;
+
+    @include media($bp580) {
+      @include margin(-40px 30px 0);
+    }
+
+    @include media($bp960) {
+      margin: 0;
+      width: 460px;
+      float: right;
+    }
+
+    @include media($bp1280) {
+      width: 380px;
+    }
+
+    .inner {
+      @include padding(31px 16px 35px);
+
+      @include media($bp580) {
+        @include padding(38px 30px 40px);
+      }
+
+      @include media($bp1280) {
+        @include padding(50px 40px);
+      }
+    }
+
+    .field--name-field-more-link {
+      display: block;
+      @extend .cta;
+
+      a {
+        height: 50px;
+
+        @include media($bp580) {
+          height: 60px;
+        }
+      }
+    }
+  }
+
+  a {
+    color: $color-white;
+    text-decoration: none;
+  }
+
+  .field--name-field-category {
+    font-size: rem(14);
+    line-height: 1;
+    opacity: .7;
+    letter-spacing: .2px;
+    font-family: $fontSansSerif;
+    @include margin(0 0 13px);
+
+    @include media($bp580) {
+      @include margin(0 0 22px);
+    }
+
+    @include media($bp960) {
+      @include margin(0 0 25px);
+    }
+
+    @include media($bp1280) {
+      @include margin(0 0 35px);
+    }
+  }
+
+  h2 {
+    font-size: rem(22);
+    line-height: 26px;
+    letter-spacing: 0.4px;
+    @include margin(0 0 15px);
+    font-family: $fontSansSerif;
+
+    @include media($bp580) {
+      font-size: rem(24);
+      line-height: 30px;
+    }
+
+    @include media($bp1280) {
+      font-size: rem(30);
+      line-height: 34px;
+      @include margin(0 0 30px);
+    }
+  }
+
+  .field--name-field-event-description,
+  .field--name-field-featured-text {
+    font-size: rem(14);
+    line-height: 22px;
+
+    @include media($bp580) {
+      display: inline;
+    }
+
+    @include media($bp960) {
+      font-size: rem(16);
+      line-height: 26px;
+    }
+
+    p {
+      font-size: rem(14);
+      line-height: 22px;
+
+      @include media($bp580) {
+        font-size: rem(16);
+        line-height: 26px;
+      }
+    }
+  }
+
+  // Removed in CGSAS-351
+  // .read-more {
+  //   opacity: .5;
+  //   font-size: rem(14);
+  //   font-family: $fontSansSerif;
+  // }
+}

@@ -1,0 +1,47 @@
+.accessibility-message-text {
+  position: relative;
+  background-color: $color-white-smoke;
+  font-family: $fontSansSerif;
+  font-size: rem(14);
+  line-height: rem(22);
+  letter-spacing: rem(-0.25);
+  @include padding(25px 40px);
+  @include margin(0 -16px);
+
+  @include media($bp580) {
+    @include margin(0 -30px);
+    @include padding(30px 90px);
+  }
+
+  @include media($bp768) {
+    margin: auto;
+    @include padding(30px 0);
+    max-width: 590px;
+  }
+
+  @include media($bp960) {
+    max-width: 820px;
+    @include padding(50px 0);
+    font-size: rem(16);
+    line-height: rem(24);
+  }
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $color-white-smoke;
+    left: auto;
+    right: 100%;
+    width: 9999%;
+  }
+
+  &:after {
+    right: auto;
+    left: 100%;
+  }
+}

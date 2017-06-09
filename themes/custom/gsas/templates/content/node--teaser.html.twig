@@ -1,0 +1,32 @@
+<div class="search-result">
+  <div class="text">
+    <div class="category">
+      {{ category }}
+    </div>
+    <div class="title">
+      <div class="title-text">
+        <h2{{ title_attributes }}>
+          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+        {% if node.bundle == 'events' %}
+          <div class="event-info">
+            <div class="time">
+              {{ content.field_event_start_date }}
+              {{ content.field_event_start_time }}
+              {{ content.field_event_end_time }}
+            </div>
+            <div class="location">
+              {{ content.field_event_location }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      {{ content.field_image }}
+    </div>
+    {{ content.field_event_description }}
+    {{ content.field_featured_text }}
+  </div>
+  <div class="image">
+    {{ content.field_image }}
+  </div>
+</div>

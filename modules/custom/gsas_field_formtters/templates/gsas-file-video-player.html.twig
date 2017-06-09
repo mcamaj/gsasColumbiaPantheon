@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a link to a file.
+ *
+ * Available variables:
+ * - attributes: The HTML attributes for the containing element.
+ * - link: A link to the file.
+ *
+ * @see template_preprocess_file_link()
+ *
+ * @ingroup themeable
+ */
+#}
+{{ attach_library('ju_field_formatters/theatre_mode') }}
+<span class="theatre-mode">
+  <video {{ video_attributes }}>
+    <source src="{{ video_url }}" type="{{ mime_type }}">
+  </video>
+  <span class="theatre-mode-fullscreen"></span>
+  <span class="theatre-mode-pause"></span>
+</span>

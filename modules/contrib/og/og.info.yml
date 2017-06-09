@@ -1,0 +1,13 @@
+name: Organic Groups
+description: API to allow associating content with groups.
+package: Organic Groups
+
+core: 8.x
+type: module
+
+dependencies:
+  - options
+  - text
+  - field
+  - user
+

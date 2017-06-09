@@ -1,0 +1,10 @@
+gsas_bedeworks_settings:
+  title: 'Bedeworks (events) settings'
+  parent: system.admin_config_services
+  description: 'Setup Bedeworks settings'
+  route_name: gsas_bedeworks.settings_form
+gsas_bedeworks_sync:
+  title: 'Events sync'
+  parent: system.admin_config_services
+  description: 'Start Events synchronization process'
+  route_name: gsas_bedeworks.sync_form
