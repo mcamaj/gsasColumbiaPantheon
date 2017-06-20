@@ -8,7 +8,7 @@ node_modules
 bower_components
 
 # Compiled css
-/style/css
+# /style/css
 
 # Minified js
-/js/dist
+# /js/dist
