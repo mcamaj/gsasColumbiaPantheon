@@ -217,4 +217,12 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   $settings['cache']['bins']['bootstrap'] = 'cache.backend.chainedfast';
   $settings['cache']['bins']['discovery'] = 'cache.backend.chainedfast';
   $settings['cache']['bins']['config']    = 'cache.backend.chainedfast';
+
+  // TRUSTED HOST SETTINGS
+  if (in_array($_ENV['PANTHEON_ENVIRONMENT'], array('dev', 'test', 'live'))) {
+    $settings['trusted_host_patterns'][] = "{$_ENV['PANTHEON_ENVIRONMENT']}-{$_ENV['PANTHEON_SITE_NAME']}.getpantheon.io";
+    $settings['trusted_host_patterns'][] = "{$_ENV['PANTHEON_ENVIRONMENT']}-{$_ENV['PANTHEON_SITE_NAME']}.pantheon.io";
+    $settings['trusted_host_patterns'][] = "{$_ENV['PANTHEON_ENVIRONMENT']}-{$_ENV['PANTHEON_SITE_NAME']}.pantheonsite.io";
+    $settings['trusted_host_patterns'][] = "{$_ENV['PANTHEON_ENVIRONMENT']}-{$_ENV['PANTHEON_SITE_NAME']}.panth.io";
+  }
 }

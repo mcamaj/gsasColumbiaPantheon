@@ -5,6 +5,9 @@
  */
 $settings['container_yamls'][] = __DIR__ . '/services.yml';
 
+$settings['trusted_host_patterns'][] = '^.+.gsas.columbia.edu$';
+$settings['trusted_host_patterns'][] = '^gsas.columbia.edu$';
+
 /**
  * Include the Pantheon-specific settings file.
  *
