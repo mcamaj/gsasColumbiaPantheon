@@ -10,9 +10,20 @@ $settings['trusted_host_patterns'][] = '^gsas.columbia.edu$';
 
 $live_domain_protocol = 'https://';
 $primary_domain_name = 'gsas.columbia.edu';
+$allowed_domain_names = array(
+  'gsas.columbia.edu',
+  'blog.gsas.columbia.edu',
+);
 
 // Redirects
 if (!$cli) {
+  // Redirect to reference domain name.
+  if (!in_array($_SERVER['HTTP_HOST'], $allowed_domain_names)) {
+    header('HTTP/1.0 301 Moved Permanently');
+    header('Location: '. $live_domain_protocol. $primary_domain_name. $_SERVER['REQUEST_URI']);
+    exit();
+  } 
+  // Blogs redirect 
 	if ($_SERVER['HTTP_HOST'] == 'blog.gsas.columbia.edu') {
 	  header('HTTP/1.0 301 Moved Permanently');
 	  header('Location: '. $live_domain_protocol. $primary_domain_name. '/blog');
