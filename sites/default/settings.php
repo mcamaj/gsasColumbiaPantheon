@@ -8,6 +8,18 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
 $settings['trusted_host_patterns'][] = '^.+.gsas.columbia.edu$';
 $settings['trusted_host_patterns'][] = '^gsas.columbia.edu$';
 
+$live_domain_protocol = 'https://';
+$primary_domain_name = 'gsas.columbia.edu';
+
+// Redirects
+if (!$cli) {
+	if ($_SERVER['HTTP_HOST'] == 'blog.gsas.columbia.edu') {
+	  header('HTTP/1.0 301 Moved Permanently');
+	  header('Location: '. $live_domain_protocol. $primary_domain_name. '/blog');
+	  exit();
+	}
+}
+
 /**
  * Include the Pantheon-specific settings file.
  *
