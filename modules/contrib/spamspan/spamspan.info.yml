@@ -6,8 +6,8 @@ package: 'Input filters'
 configure: filter.admin_overview
 dependencies:
   - filter
-# Information added by Drupal.org packaging script on 2016-08-22
-version: '8.x-1.x-dev'
+# Information added by Drupal.org packaging script on 2017-05-04
+version: '8.x-1.0-alpha1'
 core: '8.x'
 project: 'spamspan'
-datestamp: 1471868280
+datestamp: 1493887088

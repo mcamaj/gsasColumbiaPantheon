@@ -147,22 +147,22 @@ class FilterSpamspanUnitTest extends KernelTestBase {
         '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span></span>',
 
       '<a href="mailto:email@example.com"><img src="/core/misc/favicon.ico"></a>' =>
-        '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span><span class="a"> (<img src="/core/misc/favicon.ico">)</span></span>',
+        '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span><span class="t"> (<img src="/core/misc/favicon.ico">)</span></span>',
 
       '<a href="mailto:email@example.com?subject=Hi there!&body=Dear Sir">some text</a>' =>
-        '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span><span class="h"> (subject: Hi%20there%21, body: Dear%20Sir) </span><span class="a"> (some text)</span></span>',
+        '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span><span class="h"> (subject: Hi%20there%21, body: Dear%20Sir) </span><span class="t"> (some text)</span></span>',
 
       '<a href="mailto:email@example.com">The email@example.com should not show and neither email2@example.me</a>' =>
-        '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span><span class="a"> (The  should not show and neither )</span></span>',
+        '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span><span class="t"> (The  should not show and neither )</span></span>',
 
       '<a class="someclass" href="mailto:email@example.com" id="someid"></a>' =>
         '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span><span class="e"><!--class="someclass" id="someid"--></span></span>',
 
       '<a href="mailto:email@example.com?subject=Message%20Subject%2C%20nasty%20%22%20%3Cchars%3F%3E&amp;body=%22This%20is%20a%20message%20body!%20%3C%20%3E%20%22%3F%0A%0A!%22%C2%A3%24%25%5E%26*()%3A%40~%3B%23%3C%3E%3F%2C.%2F%20%5B%5D%20%7B%7D%20-%3D%20_%2B">some text</a>' =>
-        '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span><span class="h"> (subject: Message%20Subject%2C%20nasty%20%22%20%3Cchars%3F%3E, body: %22This%20is%20a%20message%20body!%20%3C%20%3E%20%22%3F%0A%0A!%22%C2%A3%24%25%5E%26*()%3A%40~%3B%23%3C%3E%3F%2C.%2F%20%5B%5D%20%7B%7D%20-%3D%20_%2B) </span><span class="a"> (some text)</span></span>',
+        '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span><span class="h"> (subject: Message%20Subject%2C%20nasty%20%22%20%3Cchars%3F%3E, body: %22This%20is%20a%20message%20body!%20%3C%20%3E%20%22%3F%0A%0A!%22%C2%A3%24%25%5E%26*()%3A%40~%3B%23%3C%3E%3F%2C.%2F%20%5B%5D%20%7B%7D%20-%3D%20_%2B) </span><span class="t"> (some text)</span></span>',
 
       '<a href="mailto:email@example.com?subject=Hi there!&body=Dear\'Sir">some text</a>' =>
-        '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span><span class="h"> (subject: Hi%20there%21, body: Dear%27Sir) </span><span class="a"> (some text)</span></span>',
+        '<span class="spamspan"><span class="u">email</span> [at] <span class="d">example.com</span><span class="h"> (subject: Hi%20there%21, body: Dear%27Sir) </span><span class="t"> (some text)</span></span>',
 
     );
 
@@ -194,7 +194,7 @@ class FilterSpamspanUnitTest extends KernelTestBase {
     // graphical at and [dot]
     $emails = array(
       'user@example.com' =>
-        '<span class="spamspan"><span class="u">user</span><img class="spamspan-image" alt="at" src="'. base_path() . drupal_get_path('module', 'spamspan') .'/image.gif" /><span class="d">example<span class="t"> [dot] </span>com</span></span>',
+        '<span class="spamspan"><span class="u">user</span><img class="spamspan-image" alt="at" src="'. base_path() . drupal_get_path('module', 'spamspan') .'/image.gif" /><span class="d">example<span class="o"> [dot] </span>com</span></span>',
     );
 
     foreach ($emails as $input => $shouldbe) {

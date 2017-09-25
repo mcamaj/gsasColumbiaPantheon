@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\search_api_exclude_entity\Plugin\Field\FieldType\SearchApiExcludeEntityFieldItem.
- */
-
 namespace Drupal\search_api_exclude_entity\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\FieldItemBase;
