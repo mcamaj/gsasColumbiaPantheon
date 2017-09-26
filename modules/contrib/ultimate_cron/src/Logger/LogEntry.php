@@ -112,7 +112,7 @@ class LogEntry {
    */
   public function log($message, $variables = array(), $level = RfcLogLevel::NOTICE) {
 
-    if ($variables !== NULL) {
+    if ($variables !== NULL && gettype($message) === 'string') {
       $message = t($message, $variables);
     }
 

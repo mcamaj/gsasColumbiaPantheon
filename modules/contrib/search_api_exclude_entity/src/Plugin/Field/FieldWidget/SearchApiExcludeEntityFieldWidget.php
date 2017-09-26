@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\search_api_exclude_entity\Plugin\Field\FieldWidget\SearchApiExcludeEntityFieldWidget.
- */
 
 namespace Drupal\search_api_exclude_entity\Plugin\Field\FieldWidget;
 

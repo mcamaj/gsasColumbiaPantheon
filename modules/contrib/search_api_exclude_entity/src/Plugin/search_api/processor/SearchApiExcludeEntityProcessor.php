@@ -1,23 +1,20 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\search_api_exclude_entity\Plugin\search_api\processor\SearchApiExcludeEntityProcessor.
- */
-
 namespace Drupal\search_api_exclude_entity\Plugin\search_api\processor;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\search_api\Plugin\PluginFormTrait;
 use Drupal\search_api\Processor\ProcessorPluginBase;
-
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
+ * Excludes entities marked as 'excluded' from being indexes.
+ *
  * @SearchApiProcessor(
  *   id = "search_api_exclude_entity_processor",
  *   label = @Translation("Search API Exclude Entity"),
- *   description = @Translation("Exclude entities from being indexed if they are excluded by 'Search API Exclude' module."),
+ *   description = @Translation("Exclude entities from being indexed, if they are excluded by 'Search API Exclude' module."),
  *   stages = {
  *     "alter_items" = -50
  *   }
@@ -26,6 +23,18 @@ use Drupal\search_api\Processor\ProcessorPluginBase;
 class SearchApiExcludeEntityProcessor extends ProcessorPluginBase implements PluginFormInterface {
 
   use PluginFormTrait;
+
+  protected $entity_manager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    /** @var static $processor */
+    $processor = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $processor->entity_manager = $container->get('entity.manager');
+    return $processor;
+  }
 
   /**
    * {@inheritdoc}
@@ -88,8 +97,7 @@ class SearchApiExcludeEntityProcessor extends ProcessorPluginBase implements Plu
    *   Options array with bundles.
    */
   private function getFieldOptions($entity_type, $datasource) {
-    $entity_manager = \Drupal::service('entity_field.manager');
-    $field_map = $entity_manager->getFieldMapByFieldType('search_api_exclude_entity');
+    $field_map = $this->entity_manager->getFieldMapByFieldType('search_api_exclude_entity');
     $bundles = $datasource->getBundles();
 
     $options = array();
@@ -131,16 +139,10 @@ class SearchApiExcludeEntityProcessor extends ProcessorPluginBase implements Plu
     static $field_map;
 
     if (!isset($field_map)) {
-      $entity_manager = \Drupal::service('entity_field.manager');
-      $field_map = $entity_manager->getFieldMapByFieldType('search_api_exclude_entity');
+      $field_map = $this->entity_manager->getFieldMapByFieldType('search_api_exclude_entity');
     }
 
-    if (isset($field_map[$entity_type][$field]['bundles'][$bundle])) {
-      return TRUE;
-    }
-    else  {
-      return FALSE;
-    }
+    return isset($field_map[$entity_type][$field]['bundles'][$bundle]);
   }
 
   /**
@@ -149,8 +151,6 @@ class SearchApiExcludeEntityProcessor extends ProcessorPluginBase implements Plu
   public function alterIndexedItems(array &$items) {
     $config = $this->getConfiguration()['fields'];
 
-    // Annoyingly, this doc comment is needed for PHPStorm. See
-    // http://youtrack.jetbrains.com/issue/WI-23586
     /** @var \Drupal\search_api\Item\ItemInterface $item */
     foreach ($items as $item_id => $item) {
       $object = $item->getOriginalObject()->getValue();
@@ -160,12 +160,13 @@ class SearchApiExcludeEntityProcessor extends ProcessorPluginBase implements Plu
       if (isset($config[$entity_type_id]) && is_array($config[$entity_type_id])) {
         foreach ($config[$entity_type_id] as $field) {
 
-          // We need to be sure that the field actually exists
-          // on the bundle before getting the value to avoid
-          // InvalidArgumentException exceptions.
+          // We need to be sure that the field actually exists on the bundle
+          // before getting the value to avoid InvalidArgumentException
+          // exceptions.
           if ($this->bundleHasField($entity_type_id, $bundle, $field)) {
-            if (NULL !== $object->get($field)->getValue()[0]['value']) {
-              $value = $object->get($field)->getValue()[0]['value'];
+            $value = $object->get($field)->getValue();
+            if (isset($value[0]['value']) && $value[0]['value'] !== NULL) {
+              $value = $value[0]['value'];
               if ($value) {
                 unset($items[$item_id]);
                 continue;

@@ -1,9 +1,6 @@
 <?php
 
 /**
- * @file
- * Contains \Drupal\google_tag\Form\GoogleTagSettingsform.
- *
  * @author Jim Berry ("solotandem", http://drupal.org/user/240748)
  */
 
@@ -112,7 +109,7 @@ class GoogleTagSettingsForm extends ConfigFormBase {
 
     $form['role']['role_toggle'] = [
       '#type' => 'radios',
-      '#title' => t('Add snippet for specific roles'),
+      '#title' => $this->t('Add snippet for specific roles'),
       '#options' => [
         GOOGLE_TAG_EXCLUDE_LISTED => $this->t('All roles except the selected roles'),
         GOOGLE_TAG_INCLUDE_LISTED => $this->t('Only the selected roles'),
@@ -126,19 +123,19 @@ class GoogleTagSettingsForm extends ConfigFormBase {
 
     $form['role']['role_list'] = [
       '#type' => 'checkboxes',
-      '#title' => t('Selected roles'),
+      '#title' => $this->t('Selected roles'),
       '#default_value' => $config->get('role_list'),
       '#options' => $user_roles,
     ];
 
     // Response statuses tab.
-    $description = t('Enter one response status per line. For more information, refer to the <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">list of HTTP status codes</a>.');
+    $description = $this->t('Enter one response status per line. For more information, refer to the <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">list of HTTP status codes</a>.');
 
     $form['status'] = [
       '#type' => 'details',
       '#title' => $this->t('Response statuses'),
       '#group' => 'settings',
-      '#description' => t('On this tab, specify the page response status condition.'),
+      '#description' => $this->t('On this tab, specify the page response status condition.'),
     ];
 
     $form['status']['status_toggle'] = [
@@ -180,6 +177,20 @@ class GoogleTagSettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('include_file'),
     ];
 
+    $form['advanced']['rebuild_snippets'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Recreate snippets on cache rebuild'),
+      '#description' => $this->t('If checked, then the JavaScript snippet files will be created during a cache rebuild. This is <strong>recommended on production sites</strong>.'),
+      '#default_value' => $config->get('rebuild_snippets'),
+    ];
+
+    $form['advanced']['debug_output'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Show debug output'),
+      '#description' => $this->t('If checked, then the result of each snippet insertion condition will be shown in the message area. Enable <strong>only for development</strong> purposes.'),
+      '#default_value' => $config->get('debug_output'),
+    ];
+
     $form['advanced']['data_layer'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Data layer'),
@@ -189,7 +200,14 @@ class GoogleTagSettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     ];
 
-    $description = t('The types of tags, triggers, and variables <strong>allowed</strong> on a page. Enter one class per line. For more information, refer to the <a href="https://developers.google.com/tag-manager/devguide#security">developer documentation</a>.');
+    $form['advanced']['include_classes'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Add classes to the data layer'),
+      '#description' => $this->t('If checked, then the listed classes will be added to the data layer.'),
+      '#default_value' => $config->get('include_classes'),
+    ];
+
+    $description = $this->t('The types of tags, triggers, and variables <strong>allowed</strong> on a page. Enter one class per line. For more information, refer to the <a href="https://developers.google.com/tag-manager/devguide#security">developer documentation</a>.');
 
     $form['advanced']['whitelist_classes'] = [
       '#type' => 'textarea',
@@ -197,6 +215,7 @@ class GoogleTagSettingsForm extends ConfigFormBase {
       '#description' => $description,
       '#default_value' => $config->get('whitelist_classes'),
       '#rows' => 5,
+      '#states' => $this->statesArray('include_classes'),
     ];
 
     $form['advanced']['blacklist_classes'] = [
@@ -205,9 +224,61 @@ class GoogleTagSettingsForm extends ConfigFormBase {
       '#description' => $this->t('The types of tags, triggers, and variables <strong>forbidden</strong> on a page. Enter one class per line.'),
       '#default_value' => $config->get('blacklist_classes'),
       '#rows' => 5,
+      '#states' => $this->statesArray('include_classes'),
+    ];
+
+    $form['advanced']['include_environment'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Include an environment'),
+      '#description' => $this->t('If checked, then the applicable snippets will include the environment items below. Enable <strong>only for development</strong> purposes.'),
+      '#default_value' => $config->get('include_environment'),
+    ];
+
+    $description = $this->t('The environment ID to use with this website container. To get an environment ID, <a href="https://tagmanager.google.com/#/admin">select Environments</a>, create an environment, then click the "Get Snippet" action. The environment ID and token will be in the snippet.');
+
+    $form['advanced']['environment_id'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Environment ID'),
+      '#description' => $description,
+      '#default_value' => $config->get('environment_id'),
+      '#attributes' => ['placeholder' => ['env-x']],
+      '#size' => 10,
+      '#maxlength' => 7,
+      '#states' => $this->statesArray('include_environment'),
+    ];
+
+    $form['advanced']['environment_token'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Environment token'),
+      '#description' => $this->t('The authentication token for this environment.'),
+      '#default_value' => $config->get('environment_token'),
+      '#attributes' => ['placeholder' => ['xxxxxxxxxxxxxxxxxxxxxx']],
+      '#size' => 20,
+      '#maxlength' => 25,
+      '#states' => $this->statesArray('include_environment'),
     ];
 
     return parent::buildForm($form, $form_state);
+  }
+
+  /**
+   * Returns states array for a form element.
+   *
+   * @param string $variable
+   *   The name of the form element.
+   *
+   * @return array
+   *   The states array.
+   */
+  public function statesArray($variable) {
+    return [
+      'required' => [
+        ':input[name="' . $variable . '"]' => ['checked' => TRUE],
+      ],
+      'invisible' => [
+        ':input[name="' . $variable . '"]' => ['checked' => FALSE],
+      ],
+    ];
   }
 
   /**
@@ -216,6 +287,7 @@ class GoogleTagSettingsForm extends ConfigFormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Trim the text values.
     $container_id = trim($form_state->getValue('container_id'));
+    $environment_id = trim($form_state->getValue('environment_id'));
     $form_state->setValue('data_layer', trim($form_state->getValue('data_layer')));
     $form_state->setValue('path_list', $this->cleanText($form_state->getValue('path_list')));
     $form_state->setValue('status_list', $this->cleanText($form_state->getValue('status_list')));
@@ -224,13 +296,18 @@ class GoogleTagSettingsForm extends ConfigFormBase {
 
     // Replace all types of dashes (n-dash, m-dash, minus) with a normal dash.
     $container_id = str_replace(['–', '—', '−'], '-', $container_id);
+    $environment_id = str_replace(['–', '—', '−'], '-', $environment_id);
     $form_state->setValue('container_id', $container_id);
+    $form_state->setValue('environment_id', $environment_id);
 
     if (!preg_match('/^GTM-\w{4,}$/', $container_id)) {
       // @todo Is there a more specific regular expression that applies?
       // @todo Is there a way to "test the connection" to determine a valid ID for
       // a container? It may be valid but not the correct one for the website.
       $form_state->setError($form['general']['container_id'], $this->t('A valid container ID is case sensitive and formatted like GTM-xxxxxx.'));
+    }
+    if ($form_state->getValue('include_environment') && !preg_match('/^env-\d{1,}$/', $environment_id)) {
+      $form_state->setError($form['advanced']['environment_id'], $this->t('A valid environment ID is case sensitive and formatted like env-x.'));
     }
 
     parent::validateForm($form, $form_state);
@@ -250,14 +327,41 @@ class GoogleTagSettingsForm extends ConfigFormBase {
       ->set('status_list', $form_state->getValue('status_list'))
       ->set('compact_snippet', $form_state->getValue('compact_snippet'))
       ->set('include_file', $form_state->getValue('include_file'))
+      ->set('rebuild_snippets', $form_state->getValue('rebuild_snippets'))
+      ->set('debug_output', $form_state->getValue('debug_output'))
       ->set('data_layer', $form_state->getValue('data_layer'))
+      ->set('include_classes', $form_state->getValue('include_classes'))
       ->set('whitelist_classes', $form_state->getValue('whitelist_classes'))
       ->set('blacklist_classes', $form_state->getValue('blacklist_classes'))
+      ->set('include_environment', $form_state->getValue('include_environment'))
+      ->set('environment_id', $form_state->getValue('environment_id'))
+      ->set('environment_token', $form_state->getValue('environment_token'))
       ->save();
 
     parent::submitForm($form, $form_state);
 
-    $this->saveSnippets();
+    $this->createAssets();
+  }
+
+  /**
+   * Prepares directory for and saves snippet files based on current settings.
+   *
+   * @return bool
+   *   Whether the files were saved.
+   */
+  public function createAssets() {
+    $result = TRUE;
+    $directory = 'public://google_tag';
+    if (!is_dir($directory) || !is_writable($directory)) {
+      $result = file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+    }
+    if ($result) {
+      $result = $this->saveSnippets();
+    }
+    else {
+      $description = t('Failed to create or make writable the directory %directory, possibly due to a permissions problem. Make the directory writable.', array('%directory' => $directory));
+    }
+    return $result;
   }
 
   /**
@@ -272,17 +376,18 @@ class GoogleTagSettingsForm extends ConfigFormBase {
     $result = TRUE;
     $snippets = google_tag_snippets();
     foreach ($snippets as $type => $snippet) {
-      $path = file_unmanaged_save_data($snippet, "public://js/google_tag.$type.js", FILE_EXISTS_REPLACE);
+      $path = file_unmanaged_save_data($snippet, "public://google_tag/google_tag.$type.js", FILE_EXISTS_REPLACE);
       $result = !$path ? FALSE : $result;
     }
-    if (!$path) {
-      drupal_set_message(t('An error occurred saving one or more snippet files. Please try again or contact the site administrator if it persists.'));
+    if (!$result) {
+      drupal_set_message($this->t('An error occurred saving one or more snippet files. Please try again or contact the site administrator if it persists.'));
     }
     else {
-      drupal_set_message(t('Created three snippet files based on configuration.'));
+      drupal_set_message($this->t('Created three snippet files based on configuration.'));
       \Drupal::service('asset.js.collection_optimizer')->deleteAll();
       _drupal_flush_css_js();
     }
+    return $result;
   }
 
   /**

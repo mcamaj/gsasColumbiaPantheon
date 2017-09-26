@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\search_api_exclude_entity\Plugin\Field\FieldFormatter\SearchApiExcludeEntityFormatter.
- */
-
 namespace Drupal\search_api_exclude_entity\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\Plugin\Field\FieldFormatter\BooleanFormatter;

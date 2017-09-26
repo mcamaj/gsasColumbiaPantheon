@@ -19,10 +19,10 @@
 namespace Drupal\spamspan\Plugin\Filter;
 
 use Drupal\Component\Utility\Html;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
 use Drupal\Component\Utility\Xss;
+use Drupal\spamspan\Plugin\SpamspanSettingsFormTrait;
 
 /**
  * Provides a filter to obfuscate email addresses.
@@ -87,6 +87,8 @@ define('SPAMSPAN_PATTERN_MAILTO',
 
 class FilterSpamspan extends FilterBase {
 
+  use SpamspanSettingsFormTrait;
+
   /**
    * Set up a regex constant to split an email address into name and domain
    * parts. The following pattern is not perfect (who is?), but is intended to
@@ -129,109 +131,6 @@ class FilterSpamspan extends FilterBase {
    */
   public function tips($long = FALSE) {
     return $this->t('Each email address will be obfuscated in a human readable fashion or, if JavaScript is enabled, replaced with a spam resistent clickable link. Email addresses will get the default web form unless specified. If replacement text (a persons name) is required a webform is also required. Separate each part with the "|" pipe symbol. Replace spaces in names with "_".');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function settingsForm(array $form, FormStateInterface $form_state) {
-    // spamspan '@' replacement
-    $form['spamspan_at'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Replacement for "@"'),
-      '#default_value' => $this->settings['spamspan_at'],
-      '#required' => TRUE,
-      '#description' => $this->t('Replace "@" with this text when javascript is disabled.'),
-    );
-    $form['spamspan_use_graphic'] = array(
-      '#type' => 'checkbox',
-      '#title' => $this->t('Use a graphical replacement for "@"'),
-      '#default_value' => $this->settings['spamspan_use_graphic'],
-      '#description' => $this->t('Replace "@" with a graphical representation when javascript is disabled (and ignore the setting "Replacement for @" above).'),
-    );
-    $form['spamspan_dot_enable'] = array(
-      '#type' => 'checkbox',
-      '#title' => $this->t('Replace dots in email with text'),
-      '#default_value' => $this->settings['spamspan_dot_enable'],
-      '#description' => $this->t('Switch on dot replacement.'),
-    );
-    $form['spamspan_dot'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Replacement for "."'),
-      '#default_value' => $this->settings['spamspan_dot'],
-      '#required' => TRUE,
-      '#description' => $this->t('Replace "." with this text.'),
-    );
-
-    //no trees, see https://www.drupal.org/node/2378437
-    //we fix this in our custom validate handler
-    $form['use_form'] = array(
-      '#type' => 'details',
-      '#title' => $this->t('Use a form instead of a link'),
-      '#open' => TRUE,
-    );
-    $form['use_form']['spamspan_use_form'] = array(
-      '#type' => 'checkbox',
-      '#title' => $this->t('Use a form instead of a link'),
-      '#default_value' => $this->settings['spamspan_use_form'],
-      '#description' => $this->t('Link to a contact form instead of an email address. The following settings are used only if you select this option.'),
-    );
-    $form['use_form']['spamspan_form_pattern'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Replacement string for the email address'),
-      '#default_value' => $this->settings['spamspan_form_pattern'],
-      '#required' => TRUE,
-      '#description' => $this->t('Replace the email link with this string and substitute the following <br />%url = the url where the form resides,<br />%email = the email address (base64 and urlencoded),<br />%displaytext = text to display instead of the email address.'),
-    );
-    //required checkbox? what is the point?
-    //if needed, then make an annotation entry as well *     "spamspan_email_encode" = TRUE,
-    /*$form['use_form']['spamspan_email_encode'] = array(
-      '#type' => 'checkbox',
-      '#title' => $this->t('Encode the email address'),
-      '#default_value' => $this->settings['spamspan_email_encode'],
-      '#required' => TRUE,
-      '#description' => $this->t('Encode the email address using base64 to protect from spammers. Must be enabled for forms because the email address ends up in a URL.'),
-    );*/
-    $form['use_form']['spamspan_form_default_url'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Default url'),
-      '#default_value' => $this->settings['spamspan_form_default_url'],
-      '#required' => TRUE,
-      '#description' => $this->t('Default url to form to use if none specified (e.g. me@example.com[custom_url_to_form])'),
-    );
-    $form['use_form']['spamspan_form_default_displaytext'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Default displaytext'),
-      '#default_value' => $this->settings['spamspan_form_default_displaytext'],
-      '#required' => TRUE,
-      '#description' => $this->t('Default displaytext to use if none specified (e.g. me@example.com[custom_url_to_form|custom_displaytext])'),
-    );
-
-    // we need this to insert our own validate/submit handlers
-    // we use our own validate handler to extract use_form settings
-    $form['#process'] = array(
-      array($this, 'processSettingsForm'),
-    );
-    return $form;
-  }
-
-  //attach our validation
-  public function processSettingsForm(&$element, FormStateInterface $form_state, &$complete_form) {
-    $complete_form['#validate'][] = array($this, 'validateSettingsForm');
-    return $element;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function validateSettingsForm(array &$form, FormStateInterface $form_state) {
-    $settings = $form_state->getValue(['filters', 'filter_spamspan', 'settings']);
-    $use_form = $settings['use_form'];
-
-    //no trees, see https://www.drupal.org/node/2378437
-    unset($settings['use_form']);
-    $settings += $use_form;
-    $form_state->setValue(['filters', 'filter_spamspan', 'settings'], $settings);
   }
 
   /**
@@ -352,7 +251,6 @@ class FilterSpamspan extends FilterBase {
     return $this->output($matches[1], $matches[2]);
   }
 
-
   /**
    * A helper function for the callbacks
    *
@@ -409,8 +307,8 @@ class FilterSpamspan extends FilterBase {
 
     if ($this->settings['spamspan_dot_enable']) {
       // Replace .'s in the address with [dot]
-      $name = str_replace('.', '<span class="t">' . $this->settings['spamspan_dot'] . '</span>', $name);
-      $domain = str_replace('.', '<span class="t">' . $this->settings['spamspan_dot'] . '</span>', $domain);
+      $name = str_replace('.', '<span class="o">' . $this->settings['spamspan_dot'] . '</span>', $name);
+      $domain = str_replace('.', '<span class="o">' . $this->settings['spamspan_dot'] . '</span>', $domain);
     }
     $output = '<span class="u">' . $name . '</span>' . $at . '<span class="d">' . $domain . '</span>';
 
@@ -444,7 +342,7 @@ class FilterSpamspan extends FilterBase {
       $contents = Xss::filter($contents, ['em', 'strong', 'cite', 'b', 'i', 'code', 'span', 'img', '!--']);
 
       if (!empty($contents)) {
-        $output .= '<span class="a"> (' . $contents . ')</span>';
+        $output .= '<span class="t"> (' . $contents . ')</span>';
       }
     }
 
